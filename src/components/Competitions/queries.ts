@@ -15,7 +15,7 @@ export interface ICompetitionsQuery {
   competitions: ICompetitions;
 }
 
-export const competitionsQuery = gql`
+export const COMPETITIONS_QUERY = gql`
   {
     competitions {
       count
