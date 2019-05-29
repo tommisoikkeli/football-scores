@@ -18,12 +18,20 @@ const mocks = [
             {
               id: 2001,
               name: 'UEFA Champions League',
-              code: 'CL'
+              code: 'CL',
+              area: {
+                id: 1,
+                name: 'Europe'
+              }
             },
             {
               id: 2021,
               name: 'Premier League',
-              code: 'PL'
+              code: 'PL',
+              area: {
+                id: 2,
+                name: 'England'
+              }
             }
           ]
         }
@@ -50,6 +58,6 @@ describe('Competitions', () => {
   it('renders data correctly', async () => {
     await wait(0);
     wrapper.update();
-    expect(wrapper.find('.competition').length).toBe(2);
+    expect(wrapper.find('.competition-card').length).toBe(2);
   });
 });

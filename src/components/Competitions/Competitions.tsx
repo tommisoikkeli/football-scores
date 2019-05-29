@@ -5,13 +5,15 @@ import {
   ICompetitionsQuery,
   COMPETITIONS_QUERY
 } from './queries';
+import './competitions.scss';
+import { CompetitionCard } from './CompetitionCard';
 
 export const Competitions: React.FC = () => {
-  function mapCompetitions(competitions: ICompetition[]) {
+  function mapCompetitions(competitions: ICompetition[]): JSX.Element[] {
     return competitions.map((c: ICompetition) => (
-      <div key={c.id} className='competition'>
-        <span>{c.name}</span>
-      </div>
+      <React.Fragment key={c.id}>
+        <CompetitionCard competition={c}/>
+      </React.Fragment>
     ));
   }
 

@@ -1,0 +1,39 @@
+@import '../../styles/variables.scss';
+
+.competitions {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 12px;
+
+  .competition-card {
+    padding: 15px;
+    border: 1px solid $border-grey;
+    flex-basis: 13%;
+    margin-bottom: 15px;
+    height: 180px;
+    position: relative;
+
+    .competition-image {
+      width: 120px;
+      height: 100px;
+    }
+
+    .competition-card-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: $footer-grey;
+      font-size: 12px;
+      padding: 10px;
+
+      .competition-name {
+        font-weight: bold;
+        margin-bottom: 2px;
+      }
+    }
+  }
+}

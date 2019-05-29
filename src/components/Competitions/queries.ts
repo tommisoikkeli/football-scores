@@ -4,6 +4,12 @@ export interface ICompetition {
   id: number;
   name: string;
   code: string;
+  area: IArea;
+}
+
+interface IArea {
+  id: string;
+  name: string;
 }
 
 export interface ICompetitions {
@@ -23,6 +29,10 @@ export const COMPETITIONS_QUERY = gql`
         id
         name
         code
+        area {
+          id
+          name
+        }
       }
     }
   }
