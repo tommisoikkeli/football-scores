@@ -7,6 +7,7 @@ import {
 } from './queries';
 import './competitions.scss';
 import { CompetitionCard } from './CompetitionCard';
+import { Loading } from '../Loading/Loading';
 
 export const Competitions: React.FC = () => {
   function mapCompetitions(competitions: ICompetition[]): JSX.Element[] {
@@ -20,7 +21,7 @@ export const Competitions: React.FC = () => {
   return (
     <Query<ICompetitionsQuery> query={COMPETITIONS_QUERY}>
       {({ loading, error, data }) => {
-        if (loading) return <div>Loading..</div>;
+        if (loading) return <Loading/>;
         if (error) return <div>Error</div>;
         return (
           <div className='competitions'>
