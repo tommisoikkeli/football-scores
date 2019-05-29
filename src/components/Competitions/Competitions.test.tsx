@@ -51,8 +51,8 @@ describe('Competitions', () => {
     );
   });
 
-  it('renders loading state', () => {
-    expect(wrapper.text()).toBe('Loading..');
+  it('renders loading spinner', () => {
+    expect(wrapper.find('Loading').length).toBe(1);
   });
 
   it('renders data correctly', async () => {
