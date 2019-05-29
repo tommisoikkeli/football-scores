@@ -11,8 +11,8 @@ const client = new ApolloClient({
 const App: React.FC = () => {
   return (
     <ApolloProvider client={client}>
-      <div className="app">
-        <Home/>
+      <div className='app'>
+        <Home />
       </div>
     </ApolloProvider>
   );

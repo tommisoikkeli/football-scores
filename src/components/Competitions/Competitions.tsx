@@ -10,10 +10,10 @@ import { CompetitionCard } from './CompetitionCard';
 import { Loading } from '../Loading/Loading';
 
 export const Competitions: React.FC = () => {
-  function mapCompetitions(competitions: ICompetition[]): JSX.Element[] {
+  function getCompetitionCards(competitions: ICompetition[]): JSX.Element[] {
     return competitions.map((c: ICompetition) => (
       <React.Fragment key={c.id}>
-        <CompetitionCard competition={c}/>
+        <CompetitionCard competition={c} />
       </React.Fragment>
     ));
   }
@@ -21,11 +21,11 @@ export const Competitions: React.FC = () => {
   return (
     <Query<ICompetitionsQuery> query={COMPETITIONS_QUERY}>
       {({ loading, error, data }) => {
-        if (loading) return <Loading/>;
+        if (loading) return <Loading />;
         if (error) return <div>Error</div>;
         return (
           <div className='competitions'>
-            {data && mapCompetitions(data.competitions.competitions)}
+            {data && getCompetitionCards(data.competitions.competitions)}
           </div>
         );
       }}
