@@ -1,0 +1,9 @@
+@import '../../styles/variables.scss';
+
+.text-wrapper {
+  font-family: 'Source Sans Pro', sans-serif;
+  p {
+    font-size: 14px;
+    color: $text-grey;
+  }
+}
