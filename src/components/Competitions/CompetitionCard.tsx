@@ -3,12 +3,14 @@ import { ICompetition } from './queries';
 
 interface ICompetitionCardProps {
   competition: ICompetition;
+  onClick?: () => void;
 }
 
 export const CompetitionCard: React.FC<ICompetitionCardProps> = ({
-  competition
+  competition,
+  onClick
 }) => (
-  <div className='competition-card'>
+  <div className='competition-card' onClick={onClick}>
     <img
       className='competition-image'
       src={`/images/${competition.code}.png`}

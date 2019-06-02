@@ -13,7 +13,7 @@ export const Competitions: React.FC = () => {
   function getCompetitionCards(competitions: ICompetition[]): JSX.Element[] {
     return competitions.map((c: ICompetition) => (
       <React.Fragment key={c.id}>
-        <CompetitionCard competition={c} />
+        <CompetitionCard competition={c} onClick={() => console.log(c.name)} />
       </React.Fragment>
     ));
   }

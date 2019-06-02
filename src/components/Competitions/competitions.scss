@@ -6,7 +6,7 @@
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-  margin: 12px;
+  margin: 0 50px;
 
   .competition-card {
     padding: 15px;
@@ -15,6 +15,9 @@
     margin-bottom: 15px;
     height: 180px;
     position: relative;
+    &:hover {
+      cursor: pointer;
+    }
 
     .competition-image {
       width: 100px;
@@ -27,7 +30,7 @@
       left: 0;
       right: 0;
       background: $footer-grey;
-      font-size: 12px;
+      font-size: 13px;
       padding: 10px;
 
       .competition-name {
