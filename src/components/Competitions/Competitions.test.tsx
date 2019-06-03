@@ -4,6 +4,7 @@ import { COMPETITIONS_QUERY } from './queries';
 import { mount } from 'enzyme';
 import { Competitions } from './Competitions';
 import wait from 'waait';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const mocks = [
   {
@@ -45,9 +46,11 @@ describe('Competitions', () => {
 
   beforeEach(() => {
     wrapper = mount(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <Competitions />
-      </MockedProvider>
+      <Router>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <Competitions />
+        </MockedProvider>
+      </Router>
     );
   });
 
