@@ -4,9 +4,9 @@ export interface ITeam {
   id: number;
   name: string;
   crestUrl: string;
-  founded: number;
-  tla: string;
-  venue: string;
+  founded?: number;
+  tla?: string;
+  venue?: string;
 }
 
 export interface ITeams {

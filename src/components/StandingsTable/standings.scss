@@ -1,0 +1,49 @@
+@import '../../styles/variables.scss';
+
+.standings-table-wrapper {
+  display: flex;
+  justify-content: center;
+
+  table {
+    padding: 10px;
+    border: 1px solid $border-grey;
+    border-radius: 3px;
+    border-spacing: 0;
+    width: 750px;
+
+    tr {
+      border: 1px solid $border-grey;
+    }
+
+    th {
+      padding: 5px;
+    }
+
+    tbody {
+      tr {
+        &:nth-child(even) {
+          background: $table-background;
+        }
+
+        td {
+          padding: 7px;
+        }
+
+        td:last-child {
+          font-weight: bold;
+        }
+
+        .team-name-block {
+          display: flex;
+          justify-content: flex-start;
+          
+          img {
+            height: 24px;
+            width: 24px;
+            margin-right: 12px;
+          }
+        }
+      }
+    }
+  }
+}
