@@ -10,6 +10,7 @@
     border-radius: 3px;
     border-spacing: 0;
     width: 750px;
+    font-size: 14px;
 
     tr {
       border: 1px solid $border-grey;
@@ -36,7 +37,7 @@
         .team-name-block {
           display: flex;
           justify-content: flex-start;
-          
+
           img {
             height: 24px;
             width: 24px;

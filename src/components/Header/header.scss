@@ -11,5 +11,9 @@
     margin: 0;
     color: $header-black;
     font-size: 38px;
+
+    &:hover {
+      color: darken($header-black, 10%);
+    }
   }
 }

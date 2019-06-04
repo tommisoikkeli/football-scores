@@ -8,11 +8,13 @@ import {
 } from '../../components/StandingsTable/queries';
 import { Loading } from '../../components/Loading/Loading';
 import { StandingsTable } from '../../components/StandingsTable/StandingsTable';
-import { Header } from '../../components/Header/Header';
+import { Text } from '../../components/Text/Text';
 
 interface IStandingsProps extends RouteComponentProps<{ id: string }> {}
 
-export const StandingsView: React.FC<IStandingsProps> = props => {
+export const Standings: React.FC<IStandingsProps> = props => {
+  const { competition } = props.location.state;
+
   return (
     <Query<IStandingsQuery, IStandingsQueryVariables>
       query={STANDINGS_QUERY}
@@ -22,7 +24,7 @@ export const StandingsView: React.FC<IStandingsProps> = props => {
         if (error) return <div>Error</div>;
         return (
           <React.Fragment>
-            <Header />
+            <Text>{competition.name}</Text>
             {data && (
               <StandingsTable standings={data.standings.standings[0].table} />
             )}

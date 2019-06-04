@@ -1,21 +1,24 @@
 import * as React from 'react';
 import './standings.scss';
 import { ITeamStanding } from './queries';
+import { TeamCrest } from './TeamCrest';
 
 interface IStandingsTableProps {
   standings: ITeamStanding[];
 }
 
-export const StandingsTable: React.FC<IStandingsTableProps> = ({ standings }) => {
+export const StandingsTable: React.FC<IStandingsTableProps> = ({
+  standings
+}) => {
   function getTableHeaders(): JSX.Element {
     return (
       <tr>
         <th title='Position'>Pos</th>
         <th title='Club'>Club</th>
         <th title='Games played'>P</th>
-        <th title='Won'>W</th>
-        <th title='Drew'>D</th>
-        <th title='Lost'>L</th>
+        <th title='Wn'>W</th>
+        <th title='Draw'>D</th>
+        <th title='Loss'>L</th>
         <th title='Goals for'>GF</th>
         <th title='Goals against'>GA</th>
         <th title='Goal difference'>GD</th>
@@ -24,14 +27,13 @@ export const StandingsTable: React.FC<IStandingsTableProps> = ({ standings }) =>
     );
   }
 
-  function getTableStandings(table: ITeamStanding[]): JSX.Element[] {
-    return table.map((s: ITeamStanding) => (
+  function getTableStandings(standings: ITeamStanding[]): JSX.Element[] {
+    return standings.map((s: ITeamStanding) => (
       <tr key={s.team.id}>
         <td>{s.position}</td>
         <td>
           <div className='team-name-block'>
-            {<img src={getTeamCrest(s.team.crestUrl)} alt='crest' />}{' '}
-            {s.team.name}
+            <TeamCrest crestUrl={s.team.crestUrl} /> {s.team.name}
           </div>
         </td>
         <td>{s.playedGames}</td>
@@ -44,13 +46,6 @@ export const StandingsTable: React.FC<IStandingsTableProps> = ({ standings }) =>
         <td>{s.points}</td>
       </tr>
     ));
-  }
-
-  function getTeamCrest(crestUrl: string): string {
-    if (!crestUrl) {
-      return '/images/crest.png';
-    }
-    return crestUrl;
   }
 
   return (
