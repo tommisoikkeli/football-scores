@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { StandingsTable } from './StandingsTable';
+import { ITeamStanding } from './queries';
 
-const testTable = [
+const testTable: ITeamStanding[] = [
   {
     position: 1,
     team: {
@@ -54,7 +55,7 @@ const testTable = [
   }
 ];
 
-const FALLBACK_CREST = '/images/crest.png';
+const FALLBACK_CREST: string = '/images/crest.png';
 
 describe('StandingsTable', () => {
   let wrapper: any;
