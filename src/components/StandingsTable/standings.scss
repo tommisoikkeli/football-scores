@@ -3,6 +3,7 @@
 .standings-table-wrapper {
   display: flex;
   justify-content: center;
+  margin-bottom: 15px;
 
   table {
     padding: 10px;
@@ -20,6 +21,10 @@
       padding: 5px;
     }
 
+    .group-identifier {
+      font-size: 12px;
+    }
+
     tbody {
       tr {
         &:nth-child(even) {
@@ -28,6 +33,11 @@
 
         td {
           padding: 7px;
+          width: 5%;
+
+          &:nth-child(2) {
+            width: 25%;
+          }
         }
 
         td:last-child {

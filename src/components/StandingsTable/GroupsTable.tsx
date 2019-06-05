@@ -1,0 +1,19 @@
+import * as React from 'react';
+import { IStandings } from './queries';
+import { StandingsTable } from './StandingsTable';
+
+interface IGroupsTableProps {
+  groups: IStandings[];
+}
+
+export const GroupsTable: React.FC<IGroupsTableProps> = ({ groups }) => {
+  function getGroupTables(standings: IStandings[]): JSX.Element[] {
+    return standings.map((group: IStandings, i: number) => (
+      <React.Fragment key={`standing-${i}`}>
+        <StandingsTable standings={group.table} groupIdentifier={group.group.replace(/_/g, ' ')} />
+      </React.Fragment>
+    ));
+  }
+
+  return <div className='multi-group-table'>{getGroupTables(groups)}</div>;
+};

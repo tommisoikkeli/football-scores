@@ -5,25 +5,34 @@ import { TeamCrest } from './TeamCrest';
 
 interface IStandingsTableProps {
   standings: ITeamStanding[];
+  groupIdentifier?: string;
 }
 
 export const StandingsTable: React.FC<IStandingsTableProps> = ({
-  standings
+  standings,
+  groupIdentifier
 }) => {
   function getTableHeaders(): JSX.Element {
     return (
-      <tr>
-        <th title='Position'>Pos</th>
-        <th title='Club'>Club</th>
-        <th title='Games played'>P</th>
-        <th title='Wn'>W</th>
-        <th title='Draw'>D</th>
-        <th title='Loss'>L</th>
-        <th title='Goals for'>GF</th>
-        <th title='Goals against'>GA</th>
-        <th title='Goal difference'>GD</th>
-        <th title='Points'>P</th>
-      </tr>
+      <thead>
+        {groupIdentifier && (
+          <tr>
+            <th className='group-identifier'>{groupIdentifier}</th>
+          </tr>
+        )}
+        <tr>
+          <th title='Position'>Pos</th>
+          <th title='Club'>Club</th>
+          <th title='Games played'>P</th>
+          <th title='Win'>W</th>
+          <th title='Draw'>D</th>
+          <th title='Loss'>L</th>
+          <th title='Goals for'>GF</th>
+          <th title='Goals against'>GA</th>
+          <th title='Goal difference'>GD</th>
+          <th title='Points'>P</th>
+        </tr>
+      </thead>
     );
   }
 
@@ -51,7 +60,7 @@ export const StandingsTable: React.FC<IStandingsTableProps> = ({
   return (
     <div className='standings-table-wrapper'>
       <table className='standings-table'>
-        <thead>{getTableHeaders()}</thead>
+        {getTableHeaders()}
         <tbody>{getTableStandings(standings)}</tbody>
       </table>
     </div>

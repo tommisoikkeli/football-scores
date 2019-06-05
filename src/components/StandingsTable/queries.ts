@@ -20,7 +20,7 @@ interface IStandingsTypes {
   standings: IStandings[];
 }
 
-interface IStandings {
+export interface IStandings {
   type: string;
   stage: string;
   group: string;
