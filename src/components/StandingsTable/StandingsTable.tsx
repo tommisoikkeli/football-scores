@@ -23,7 +23,7 @@ export const StandingsTable: React.FC<IStandingsTableProps> = ({
         <tr>
           <th title='Position'>Pos</th>
           <th title='Club'>Club</th>
-          <th title='Games played'>P</th>
+          <th title='Games played'>G</th>
           <th title='Win'>W</th>
           <th title='Draw'>D</th>
           <th title='Loss'>L</th>
