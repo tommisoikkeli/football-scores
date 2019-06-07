@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { IStandings } from './queries';
 import { StandingsTable } from './StandingsTable';
+import { IStandings } from '../../models/standings';
 
 interface IGroupsTableProps {
   groups: IStandings[];

@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { STANDINGS_QUERY } from '../../components/StandingsTable/queries';
 import { mount } from 'enzyme';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { Standings } from './Standings';
 import { BrowserRouter as Router } from 'react-router-dom';
 import wait from 'waait';
+import { STANDINGS_QUERY } from './queries';
 
 const mocks = [
   {

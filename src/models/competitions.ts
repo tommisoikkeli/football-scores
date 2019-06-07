@@ -1,5 +1,3 @@
-import { gql } from 'apollo-boost';
-
 export interface ICompetition {
   id: number;
   name: string;
@@ -20,20 +18,3 @@ export interface ICompetitions {
 export interface ICompetitionsQuery {
   competitions: ICompetitions;
 }
-
-export const COMPETITIONS_QUERY = gql`
-  query Competitions {
-    competitions {
-      count
-      competitions {
-        id
-        name
-        code
-        area {
-          id
-          name
-        }
-      }
-    }
-  }
-`;

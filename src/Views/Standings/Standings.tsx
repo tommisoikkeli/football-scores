@@ -1,16 +1,12 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Query } from 'react-apollo';
-import {
-  IStandingsQuery,
-  IStandingsQueryVariables,
-  STANDINGS_QUERY,
-  IStandings
-} from '../../components/StandingsTable/queries';
 import { Loading } from '../../components/Loading/Loading';
 import { StandingsTable } from '../../components/StandingsTable/StandingsTable';
 import { Text } from '../../components/Text/Text';
 import { GroupsTable } from '../../components/StandingsTable/GroupsTable';
+import { IStandings, IStandingsQuery, IStandingsQueryVariables } from '../../models/standings';
+import { STANDINGS_QUERY } from './queries';
 
 interface IStandingsProps extends RouteComponentProps<{ id: string }> {}
 

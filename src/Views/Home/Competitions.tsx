@@ -1,13 +1,10 @@
 import * as React from 'react';
 import { Query } from 'react-apollo';
-import {
-  ICompetition,
-  ICompetitionsQuery,
-  COMPETITIONS_QUERY
-} from './queries';
-import './competitions.scss';
-import { CompetitionCard } from './CompetitionCard';
-import { Loading } from '../Loading/Loading';
+import { CompetitionCard } from '../../components/Competitions/CompetitionCard';
+import { Loading } from '../../components/Loading/Loading';
+import '../../components/Competitions/competitions.scss';
+import { ICompetition, ICompetitionsQuery } from '../../models/competitions';
+import { COMPETITIONS_QUERY } from './queries';
 
 export const Competitions: React.FC = () => {
   function getCompetitionCards(competitions: ICompetition[]): JSX.Element[] {

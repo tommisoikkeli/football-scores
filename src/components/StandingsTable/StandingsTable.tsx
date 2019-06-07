@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './standings.scss';
-import { ITeamStanding } from './queries';
 import { TeamCrest } from './TeamCrest';
+import { ITeamStanding } from '../../models/standings';
 
 interface IStandingsTableProps {
   standings: ITeamStanding[];

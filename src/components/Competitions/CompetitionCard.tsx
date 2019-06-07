@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ICompetition } from './queries';
 import { Link } from 'react-router-dom';
+import { ICompetition } from '../../models/competitions';
 
 interface ICompetitionCardProps {
   competition: ICompetition;
