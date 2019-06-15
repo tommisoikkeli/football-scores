@@ -1,0 +1,15 @@
+.team-info-container {
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .info-row {
+    padding: 5px;
+    font-size: 14px;
+    
+    .info-text {
+      font-weight: bold;
+    }
+  }
+}

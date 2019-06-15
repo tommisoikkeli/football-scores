@@ -2,7 +2,23 @@ export interface ITeam {
   id: number;
   name: string;
   crestUrl: string;
-  tla: string;
-  founded: number;
-  venue: string;
+  tla?: string;
+  founded?: number;
+  venue?: string;
+  squad?: IPlayer[];
+}
+
+export interface IPlayer {
+  id: number;
+  name: string;
+  position: string;
+  role: string;
+}
+
+export interface ITeamQuery {
+  team: ITeam;
+}
+
+export interface ITeamQueryVariables {
+  id: number;
 }

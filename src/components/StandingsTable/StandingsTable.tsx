@@ -1,7 +1,8 @@
 import * as React from 'react';
 import './standings.scss';
-import { TeamCrest } from './TeamCrest';
+import { TeamCrest } from '../Team/TeamCrest';
 import { ITeamStanding } from '../../models/standings';
+import { Link } from 'react-router-dom';
 
 interface IStandingsTableProps {
   standings: ITeamStanding[];
@@ -12,7 +13,7 @@ export const StandingsTable: React.FC<IStandingsTableProps> = ({
   standings,
   groupIdentifier
 }) => {
-  function getTableHeaders(): JSX.Element {
+  const getTableHeaders = (): JSX.Element => {
     return (
       <thead>
         {groupIdentifier && (
@@ -26,7 +27,7 @@ export const StandingsTable: React.FC<IStandingsTableProps> = ({
           <th title='Games played'>G</th>
           <th title='Win'>W</th>
           <th title='Draw'>D</th>
-          <th title='Loss'>L</th>
+          <th title='Lost'>L</th>
           <th title='Goals for'>GF</th>
           <th title='Goals against'>GA</th>
           <th title='Goal difference'>GD</th>
@@ -36,13 +37,14 @@ export const StandingsTable: React.FC<IStandingsTableProps> = ({
     );
   }
 
-  function getTableStandings(standings: ITeamStanding[]): JSX.Element[] {
+  const getTableStandings = (standings: ITeamStanding[]): JSX.Element[] => {
     return standings.map((s: ITeamStanding) => (
       <tr key={s.team.id}>
         <td>{s.position}</td>
         <td>
           <div className='team-name-block'>
-            <TeamCrest crestUrl={s.team.crestUrl} /> {s.team.name}
+            <TeamCrest crestUrl={s.team.crestUrl} />{' '}
+            <Link to={`/team/${s.team.id}`}>{s.team.name}</Link>
           </div>
         </td>
         <td>{s.playedGames}</td>

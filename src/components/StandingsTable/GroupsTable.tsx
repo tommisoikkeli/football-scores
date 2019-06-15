@@ -7,7 +7,7 @@ interface IGroupsTableProps {
 }
 
 export const GroupsTable: React.FC<IGroupsTableProps> = ({ groups }) => {
-  function getGroupTables(standings: IStandings[]): JSX.Element[] {
+  const getGroupTables = (standings: IStandings[]): JSX.Element[] => {
     return standings.map((group: IStandings, i: number) => (
       <React.Fragment key={`standing-${i}`}>
         <StandingsTable standings={group.table} groupIdentifier={group.group.replace(/_/g, ' ')} />

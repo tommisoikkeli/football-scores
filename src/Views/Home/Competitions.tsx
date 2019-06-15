@@ -7,7 +7,7 @@ import { ICompetition, ICompetitionsQuery } from '../../models/competitions';
 import { COMPETITIONS_QUERY } from './queries';
 
 export const Competitions: React.FC = () => {
-  function getCompetitionCards(competitions: ICompetition[]): JSX.Element[] {
+  const getCompetitionCards = (competitions: ICompetition[]): JSX.Element[] => {
     return competitions.map((c: ICompetition) => (
       <React.Fragment key={c.id}>
         <CompetitionCard competition={c} />

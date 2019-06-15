@@ -26,6 +26,11 @@ const mocks = [
               name: 'Spain'
             }
           },
+          season: {
+            id: 123,
+            startDate: '2019-08-18',
+            endDate: '2020-05-17'
+          },
           standings: [
             {
               type: 'TOTAL',

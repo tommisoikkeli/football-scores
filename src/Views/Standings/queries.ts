@@ -12,6 +12,11 @@ export const STANDINGS_QUERY = gql`
           name
         }
       }
+      season {
+        id
+        startDate
+        endDate
+      }
       standings {
         type
         stage
