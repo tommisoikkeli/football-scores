@@ -9,6 +9,7 @@ export const TEAM_QUERY = gql`
       name
       tla
       venue
+      clubColors
       squad {
         id
         name

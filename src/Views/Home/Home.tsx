@@ -4,7 +4,7 @@ import { Competitions } from './Competitions';
 
 export const Home: React.FC = () => (
   <div className='home'>
-    <Text>Welcome! Select your favorite team(s) from the leagues below.</Text>
+    <Text>Welcome! Select a competition to see teams, standings and results.</Text>
     <Competitions />
   </div>
 );

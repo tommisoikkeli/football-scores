@@ -5,6 +5,7 @@ export interface ITeam {
   tla?: string;
   founded?: number;
   venue?: string;
+  clubColors?: string;
   squad?: IPlayer[];
 }
 
