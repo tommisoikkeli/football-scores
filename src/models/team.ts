@@ -14,6 +14,7 @@ export interface IPlayer {
   name: string;
   position: string;
   role: string;
+  shirtNumber: number;
 }
 
 export interface ITeamQuery {

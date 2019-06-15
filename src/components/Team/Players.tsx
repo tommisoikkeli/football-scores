@@ -9,15 +9,16 @@ interface IPlayersProps {
 type Position = 'Goalkeeper' | 'Defender' | 'Midfielder' | 'Attacker';
 
 export const Players: React.FC<IPlayersProps> = ({ players }) => {
-  const filterPlayersByPosition = (
-    players: IPlayer[],
-    position: Position
-  ): IPlayer[] => players.filter((p: IPlayer) => p.position === position);
+  const filterPlayersByPosition = (position: Position): IPlayer[] =>
+    players.filter((p: IPlayer) => p.position === position);
 
   const getPlayers = (players: IPlayer[]): JSX.Element[] =>
     players.map((p: IPlayer) => (
       <div className='player-info' key={p.id}>
-        {p.name}
+        <span>{p.name}</span>
+        {p.shirtNumber ? (
+          <span className='shirt-number'>{p.shirtNumber}</span>
+        ) : null}
       </div>
     ));
 
@@ -25,19 +26,19 @@ export const Players: React.FC<IPlayersProps> = ({ players }) => {
     <div className='squad'>
       <div className='position-divider'>
         <Text>Goalkeepers</Text>
-        {getPlayers(filterPlayersByPosition(players, 'Goalkeeper'))}
+        {getPlayers(filterPlayersByPosition('Goalkeeper'))}
       </div>
       <div className='position-divider'>
         <Text>Defenders</Text>
-        {getPlayers(filterPlayersByPosition(players, 'Defender'))}
+        {getPlayers(filterPlayersByPosition('Defender'))}
       </div>
       <div className='position-divider'>
         <Text>Midfielders</Text>
-        {getPlayers(filterPlayersByPosition(players, 'Midfielder'))}
+        {getPlayers(filterPlayersByPosition('Midfielder'))}
       </div>
       <div className='position-divider'>
         <Text>Attackers</Text>
-        {getPlayers(filterPlayersByPosition(players, 'Attacker'))}
+        {getPlayers(filterPlayersByPosition('Attacker'))}
       </div>
     </div>
   );

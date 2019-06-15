@@ -30,6 +30,16 @@
     .position-divider {
       margin: 12px;
       padding: 5px;
+
+      .player-info {
+        margin: 5px;
+
+        .shirt-number {
+          font-size: 12px;
+          margin: 0 5px;
+          padding: 3px;
+        }
+      }
     }
   }
 }

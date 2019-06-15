@@ -15,6 +15,7 @@ export const TEAM_QUERY = gql`
         name
         position
         role
+        shirtNumber
       }
     }
   }
