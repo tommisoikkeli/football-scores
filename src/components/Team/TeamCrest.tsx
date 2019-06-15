@@ -12,11 +12,13 @@ export const TeamCrest: React.FC<ITeamCrestProps> = ({ crestUrl }) => {
       return FALLBACK_CREST;
     }
     return crestUrl;
-  }
+  };
 
   const addDefaultCrest = (event: React.ChangeEvent<HTMLImageElement>) => {
     event.target.src = FALLBACK_CREST;
-  }
+  };
 
-  return <img src={getTeamCrest(crestUrl)} alt='crest' onError={addDefaultCrest} />;
+  return (
+    <img src={getTeamCrest(crestUrl)} alt='crest' onError={addDefaultCrest} />
+  );
 };

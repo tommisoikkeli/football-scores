@@ -13,7 +13,7 @@ export const Competitions: React.FC = () => {
         <CompetitionCard competition={c} />
       </React.Fragment>
     ));
-  }
+  };
 
   return (
     <Query<ICompetitionsQuery> query={COMPETITIONS_QUERY}>

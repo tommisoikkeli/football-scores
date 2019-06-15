@@ -15,12 +15,12 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
         {team.name} ({team.tla})
       </Text>
       <TeamCrest crestUrl={team.crestUrl} />
-      <div className="info-row">
-        <span className="info-text">Founded: </span>
+      <div className='info-row'>
+        <span className='info-text'>Founded: </span>
         <span>{team.founded}</span>
       </div>
-      <div className="info-row">
-        <span className="info-text">Venue: </span>
+      <div className='info-row'>
+        <span className='info-text'>Venue: </span>
         <span>{team.venue}</span>
       </div>
     </div>

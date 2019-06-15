@@ -35,7 +35,7 @@ export const StandingsTable: React.FC<IStandingsTableProps> = ({
         </tr>
       </thead>
     );
-  }
+  };
 
   const getTableStandings = (standings: ITeamStanding[]): JSX.Element[] => {
     return standings.map((s: ITeamStanding) => (
@@ -57,7 +57,7 @@ export const StandingsTable: React.FC<IStandingsTableProps> = ({
         <td>{s.points}</td>
       </tr>
     ));
-  }
+  };
 
   return (
     <div className='standings-table-wrapper'>
