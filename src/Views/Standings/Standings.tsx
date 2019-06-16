@@ -5,7 +5,11 @@ import { Loading } from '../../components/Loading/Loading';
 import { StandingsTable } from '../../components/StandingsTable/StandingsTable';
 import { Text } from '../../components/Text/Text';
 import { GroupsTable } from '../../components/StandingsTable/GroupsTable';
-import { IStandings, IStandingsQuery, IStandingsQueryVariables } from '../../models/standings';
+import {
+  IStandings,
+  IStandingsQuery,
+  IStandingsQueryVariables
+} from '../../models/standings';
 import { STANDINGS_QUERY } from './queries';
 
 interface IStandingsProps extends RouteComponentProps<{ id: string }> {}
@@ -14,6 +18,9 @@ export const Standings: React.FC<IStandingsProps> = props => {
   const { competition } = props.location.state;
 
   const hasGroups = (standings: IStandings[]) => standings.length > 1;
+
+  const getSeason = (startDate: string, endDate: string): string =>
+    `Season ${new Date(startDate).getFullYear()} - ${new Date(endDate).getFullYear()}`;
 
   return (
     <Query<IStandingsQuery, IStandingsQueryVariables>
@@ -25,6 +32,13 @@ export const Standings: React.FC<IStandingsProps> = props => {
         return (
           <React.Fragment>
             <Text>{competition.name}</Text>
+            <Text>
+              {data &&
+                getSeason(
+                  data.standings.season.startDate,
+                  data.standings.season.endDate
+                )}
+            </Text>
             {data && !hasGroups(data.standings.standings) ? (
               <StandingsTable standings={data.standings.standings[0].table} />
             ) : (

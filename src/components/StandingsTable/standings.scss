@@ -29,6 +29,10 @@
       tr {
         &:nth-child(even) {
           background: $table-background;
+
+          &:hover {
+            background: darken($table-background, 2%);
+          }
         }
 
         td {
@@ -57,6 +61,10 @@
           .fallback-crest {
             opacity: 0.4;
           }
+        }
+
+        &:hover {
+          background: darken(#fff, 2%);
         }
       }
     }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ITeam } from '../../models/team';
+import { ITeam, IPlayer } from '../../models/team';
 import { TeamCrest } from './TeamCrest';
 import './team.scss';
 import { Text } from '../Text/Text';
@@ -22,6 +22,9 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
     ));
   };
 
+  const getTeamCoach = (): IPlayer =>
+    team.squad.filter(p => p.role === 'COACH')[0];
+
   return (
     <div className='team-info-container'>
       <Text>
@@ -40,10 +43,10 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
         <span className='info-text'>Colors: </span>
         {getTeamColors()}
       </div>
-      {team.squad.length > 0 && (
+      {!!getTeamCoach() && (
         <div className='info-row'>
           <span className='info-text'>Coach: </span>
-          <span>{team.squad.filter(p => p.role === 'COACH')[0].name}</span>
+          <span>{getTeamCoach().name}</span>
         </div>
       )}
       {team.squad.length > 0 && <Players players={team.squad} />}

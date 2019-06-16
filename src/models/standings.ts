@@ -16,7 +16,14 @@ export interface ITeamStanding {
 
 interface IStandingsTypes {
   competition: ICompetition;
+  season: ISeason;
   standings: IStandings[];
+}
+
+interface ISeason {
+  id: number;
+  startDate: string;
+  endDate: string;
 }
 
 export interface IStandings {
