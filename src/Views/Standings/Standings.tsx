@@ -19,8 +19,15 @@ export const Standings: React.FC<IStandingsProps> = props => {
 
   const hasGroups = (standings: IStandings[]) => standings.length > 1;
 
-  const getSeason = (startDate: string, endDate: string): string =>
-    `Season ${new Date(startDate).getFullYear()} - ${new Date(endDate).getFullYear()}`;
+  const getSeason = (startDate: Date, endDate: Date): string => {
+    const startYear = startDate.getFullYear();
+    const endYear = endDate.getFullYear();
+    if (startYear === endYear) {
+      return `${startYear}`;
+    }
+    return `Season ${startYear} - ${endYear}`;
+  }
+    
 
   return (
     <Query<IStandingsQuery, IStandingsQueryVariables>
@@ -35,8 +42,8 @@ export const Standings: React.FC<IStandingsProps> = props => {
             <Text>
               {data &&
                 getSeason(
-                  data.standings.season.startDate,
-                  data.standings.season.endDate
+                  new Date(data.standings.season.startDate),
+                  new Date(data.standings.season.endDate)
                 )}
             </Text>
             {data && !hasGroups(data.standings.standings) ? (
