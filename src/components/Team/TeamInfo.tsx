@@ -13,7 +13,12 @@ interface ITeamInfoProps {
 
 export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
   const getTeamColors = (): JSX.Element[] => {
+    // Make an array from the team colors.
     const colors: string[] = splitString(team.clubColors, '/');
+
+    // Map the colors and create color balls by using the color as background.
+    // Color passed to the ColorBall component is converted to lowercase and spaces are removed.
+    // For example: 'Sky Blue' -> 'skyblue'.
     return colors.map((c: string, i: number) => (
       <React.Fragment key={`color-${i}`}>
         <span>{c}</span>
