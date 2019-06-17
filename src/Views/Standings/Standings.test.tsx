@@ -116,5 +116,6 @@ describe('Standings', () => {
     await wait(0);
     wrapper.update();
     expect(wrapper.find('StandingsTable').length).toBe(1);
+    expect(wrapper.find('Text').at(1).text()).toBe('Season 2019 - 2020');
   });
 });
