@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IPlayer } from '../../models/team';
 import { Text } from '../Text/Text';
-import { shouldAddGoat, addGoat } from '../../utils/utils';
+import { checkPlayerAndAddGoatIfNeeded } from '../../utils/utils';
 
 interface IPlayersProps {
   players: IPlayer[];
@@ -16,7 +16,7 @@ export const Players: React.FC<IPlayersProps> = ({ players }) => {
   const getPlayers = (players: IPlayer[]): JSX.Element[] =>
     players.map((p: IPlayer) => (
       <div className='player-info' key={p.id}>
-        <span>{shouldAddGoat(p.name) ? addGoat(p.name) : p.name}</span>
+        <span>{checkPlayerAndAddGoatIfNeeded(p.name)}</span>
         {p.shirtNumber ? (
           <span className='shirt-number'>{p.shirtNumber}</span>
         ) : null}
