@@ -6,12 +6,15 @@ import { Text } from '../Text/Text';
 import { Players } from './Players';
 import { splitString } from '../../utils/utils';
 import { ColorBall } from './ColorBall';
+import { Button, ButtonType } from '../Button/Button';
 
 interface ITeamInfoProps {
   team: ITeam;
 }
 
 export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
+  const [isClicked, setIsClicked] = React.useState<boolean>(false);
+
   const getTeamColors = (): JSX.Element[] => {
     // Make an array from the team colors.
     const colors: string[] = splitString(team.clubColors, '/');
@@ -30,12 +33,23 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
   const getTeamCoach = (): IPlayer =>
     team.squad.filter(p => p.role === 'COACH')[0];
 
+  const onFavoriteButtonClick = (): void => {
+    setIsClicked(!isClicked);
+    console.log(team.name);
+  }
+
   return (
     <div className='team-info-container'>
       <Text>
         {team.name} ({team.tla})
       </Text>
       <TeamCrest crestUrl={team.crestUrl} />
+      <Button
+        onClick={onFavoriteButtonClick}
+        text={`${!isClicked ? 'Follow' : 'Unfollow'}`}
+        type={ButtonType.FAVORITE}
+        additionalClass={isClicked && 'clicked'}
+      />
       <div className='info-row'>
         <span className='info-text'>Founded: </span>
         <span>{team.founded}</span>

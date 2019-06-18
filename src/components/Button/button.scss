@@ -1,0 +1,37 @@
+@import '../../styles/variables.scss';
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  outline: none;
+  margin: 12px;
+  border-radius: 3px;
+  
+  &.favorite {
+    border: 1px solid $favorite-button-color;
+    color: $favorite-button-color;
+    width: 150px;
+    background: linear-gradient(to right, white 50%, $favorite-button-color 50%);
+    background-size: 200% 100%;
+    transition: all ease 0.5s;
+
+    &:hover {
+      border: 1px solid darken($favorite-button-color, 5%);
+      color: darken($favorite-button-color, 5%);
+    }
+
+    &.clicked {
+      background-position: -100% 0;
+      color: white;
+    }
+  }
+
+  .button-content {
+    font-weight: bold;
+    flex: 1 1 auto;
+    text-transform: uppercase;
+  }
+}
