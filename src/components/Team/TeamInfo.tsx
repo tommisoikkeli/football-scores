@@ -26,12 +26,12 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
   // Save or remove team on button click.
   // To avoid duplicates, it first checks if team is saved already
   React.useEffect(() => {
-    const { id, name } = team;
+    const { id, name, crestUrl } = team;
     if (isActive && !isTeamFollowed) {
-      setLocalStorageItem(LOCAL_STORAGE_KEY, { id, name });
+      setLocalStorageItem(LOCAL_STORAGE_KEY, { id, name, crestUrl });
     }
     if (!isActive && isTeamFollowed) {
-      removeLocalStorageItem(LOCAL_STORAGE_KEY, { id, name });
+      removeLocalStorageItem(LOCAL_STORAGE_KEY, { id, name, crestUrl });
     }
   }, [isActive, team, isTeamFollowed]);
 
