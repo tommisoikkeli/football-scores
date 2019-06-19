@@ -17,10 +17,10 @@ interface ITeamInfoProps {
   team: ITeam;
 }
 
-const LOCAL_STORAGE_KEY = 'teams';
+const LOCAL_STORAGE_KEY: string = 'teams';
 
 export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
-  const isTeamFollowed = isTeamSaved(LOCAL_STORAGE_KEY, team.id);
+  const isTeamFollowed: boolean = isTeamSaved(LOCAL_STORAGE_KEY, team.id);
   const [isActive, setIsActive] = React.useState<boolean>(isTeamFollowed);
 
   // Save or remove team on button click.
