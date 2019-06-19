@@ -21,19 +21,19 @@ const LOCAL_STORAGE_KEY = 'teams';
 
 export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
   const isTeamFollowed = isTeamSaved(LOCAL_STORAGE_KEY, team.id);
-  const [isSaved, setIsSaved] = React.useState<boolean>(isTeamFollowed);
+  const [isActive, setIsActive] = React.useState<boolean>(isTeamFollowed);
 
   // Save or remove team on button click.
   // To avoid duplicates, it first checks if team is saved already
   React.useEffect(() => {
     const { id, name } = team;
-    if (isSaved && !isTeamFollowed) {
+    if (isActive && !isTeamFollowed) {
       setLocalStorageItem(LOCAL_STORAGE_KEY, { id, name });
     }
-    if (!isSaved && isTeamFollowed) {
+    if (!isActive && isTeamFollowed) {
       removeLocalStorageItem(LOCAL_STORAGE_KEY, { id, name });
     }
-  }, [isSaved, team, isTeamFollowed]);
+  }, [isActive, team, isTeamFollowed]);
 
   const getTeamColors = (): JSX.Element[] => {
     // Make an array from the team colors.
@@ -60,10 +60,10 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
       </Text>
       <TeamCrest crestUrl={team.crestUrl} />
       <Button
-        onClick={() => setIsSaved(!isSaved)}
-        text={`${!isSaved ? 'Follow' : 'Unfollow'}`}
+        onClick={() => setIsActive(!isActive)}
+        text={`${!isActive ? 'Follow' : 'Unfollow'}`}
         type={ButtonType.FAVORITE}
-        additionalClass={isSaved && 'clicked'}
+        additionalClass={isActive && 'clicked'}
       />
     </React.Fragment>
   );
