@@ -19,6 +19,8 @@ export const Standings: React.FC<IStandingsProps> = props => {
 
   const hasGroups = (standings: IStandings[]) => standings.length > 1;
 
+  const isTableEmpty = (standings: IStandings[]) => standings.length === 0;
+
   const getSeason = (startDate: Date, endDate: Date): string => {
     const startYear = startDate.getFullYear();
     const endYear = endDate.getFullYear();
@@ -26,8 +28,7 @@ export const Standings: React.FC<IStandingsProps> = props => {
       return `${startYear}`;
     }
     return `Season ${startYear} - ${endYear}`;
-  }
-    
+  };
 
   return (
     <Query<IStandingsQuery, IStandingsQueryVariables>
@@ -46,10 +47,15 @@ export const Standings: React.FC<IStandingsProps> = props => {
                   new Date(data.standings.season.endDate)
                 )}
             </Text>
-            {data && !hasGroups(data.standings.standings) ? (
+            {data &&
+            !isTableEmpty(data.standings.standings) &&
+            !hasGroups(data.standings.standings) ? (
               <StandingsTable standings={data.standings.standings[0].table} />
             ) : (
-              data && <GroupsTable groups={data.standings.standings} />
+              data &&
+              !isTableEmpty(data.standings.standings) && (
+                <GroupsTable groups={data.standings.standings} />
+              )
             )}
           </React.Fragment>
         );

@@ -4,7 +4,12 @@ import { TeamCrest } from './TeamCrest';
 import './team.scss';
 import { Text } from '../Text/Text';
 import { Players } from './Players';
-import { splitString } from '../../utils/utils';
+import {
+  splitString,
+  setLocalStorageItem,
+  removeLocalStorageItem,
+  isTeamSaved
+} from '../../utils/utils';
 import { ColorBall } from './ColorBall';
 import { Button, ButtonType } from '../Button/Button';
 
@@ -12,8 +17,23 @@ interface ITeamInfoProps {
   team: ITeam;
 }
 
+const LOCAL_STORAGE_KEY = 'teams';
+
 export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
-  const [isClicked, setIsClicked] = React.useState<boolean>(false);
+  const isTeamFollowed = isTeamSaved(LOCAL_STORAGE_KEY, team.id);
+  const [isSaved, setIsSaved] = React.useState<boolean>(isTeamFollowed);
+
+  // Save or remove team on button click.
+  // To avoid duplicates, it first checks if team is saved already
+  React.useEffect(() => {
+    const { id, name } = team;
+    if (isSaved && !isTeamFollowed) {
+      setLocalStorageItem(LOCAL_STORAGE_KEY, { id, name });
+    }
+    if (!isSaved && isTeamFollowed) {
+      removeLocalStorageItem(LOCAL_STORAGE_KEY, { id, name });
+    }
+  }, [isSaved, team, isTeamFollowed]);
 
   const getTeamColors = (): JSX.Element[] => {
     // Make an array from the team colors.
@@ -33,23 +53,23 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
   const getTeamCoach = (): IPlayer =>
     team.squad.filter(p => p.role === 'COACH')[0];
 
-  const onFavoriteButtonClick = (): void => {
-    setIsClicked(!isClicked);
-    console.log(team.name);
-  }
-
-  return (
-    <div className='team-info-container'>
+  const renderTeamInfoTopRows = (): JSX.Element => (
+    <React.Fragment>
       <Text>
         {team.name} ({team.tla})
       </Text>
       <TeamCrest crestUrl={team.crestUrl} />
       <Button
-        onClick={onFavoriteButtonClick}
-        text={`${!isClicked ? 'Follow' : 'Unfollow'}`}
+        onClick={() => setIsSaved(!isSaved)}
+        text={`${!isSaved ? 'Follow' : 'Unfollow'}`}
         type={ButtonType.FAVORITE}
-        additionalClass={isClicked && 'clicked'}
+        additionalClass={isSaved && 'clicked'}
       />
+    </React.Fragment>
+  );
+
+  const renderInfoRows = (): JSX.Element => (
+    <React.Fragment>
       <div className='info-row'>
         <span className='info-text'>Founded: </span>
         <span>{team.founded}</span>
@@ -68,6 +88,13 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
           <span>{getTeamCoach().name}</span>
         </div>
       )}
+    </React.Fragment>
+  );
+
+  return (
+    <div className='team-info-container'>
+      {renderTeamInfoTopRows()}
+      {renderInfoRows()}
       {team.squad.length > 0 && <Players players={team.squad} />}
     </div>
   );

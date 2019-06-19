@@ -19,8 +19,8 @@
     transition: all ease 0.5s;
 
     &:hover {
-      border: 1px solid darken($favorite-button-color, 5%);
-      color: darken($favorite-button-color, 5%);
+      border: 1px solid darken($favorite-button-color, 15%);
+      color: darken($favorite-button-color, 15%);
     }
 
     &.clicked {

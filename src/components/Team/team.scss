@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .team-info-container {
   display: flex;
   flex-direction: column;
@@ -35,6 +37,10 @@
     .position-divider {
       margin: 12px;
       padding: 5px;
+
+      &:not(:first-child) {
+        border-top: 1px solid $divider-color;
+      }
 
       .player-info {
         margin: 5px;

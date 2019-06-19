@@ -24,3 +24,8 @@ export interface ITeamQuery {
 export interface ITeamQueryVariables {
   id: number;
 }
+
+export interface ILocalStorageTeam {
+  id: number;
+  name: string;
+}
