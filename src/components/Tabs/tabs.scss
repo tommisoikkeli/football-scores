@@ -1,0 +1,39 @@
+@import '../../styles/variables.scss';
+
+.tabs-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  background: $background-grey;
+  align-self: stretch;
+
+  .tab {
+    border: 1px solid $border-grey;
+    padding: 10px;
+    margin-right: 8px;
+    cursor: pointer;
+    border-radius: 3px 3px 0 0;
+    width: 140px;
+    font-size: 14px;
+    z-index: 1;
+    box-shadow: $tab-box-shadow;
+
+    &:hover {
+      background: darken($background-grey, 2%);
+    }
+
+    &.active {
+      font-weight: bold;
+      background: $page-background;
+      border-bottom-color: $page-background;
+    }
+  }
+}
+
+.tab-divider {
+  border-top: 1px solid $border-grey;
+  position: relative;
+  top: -1px;
+  margin-bottom: 25px;
+  width: 100%;
+}

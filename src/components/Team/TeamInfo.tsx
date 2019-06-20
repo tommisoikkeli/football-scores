@@ -12,9 +12,16 @@ import {
 } from '../../utils/utils';
 import { ColorBall } from './ColorBall';
 import { Button, ButtonType } from '../Button/Button';
+import { Tabs } from '../Tabs/Tabs';
+import { Tab } from '../Tabs/Tab';
 
 interface ITeamInfoProps {
   team: ITeam;
+}
+
+enum TeamTabs {
+  OVERVIEW = 'Overview',
+  MATCHES = 'Matches'
 }
 
 const LOCAL_STORAGE_KEY: string = 'teams';
@@ -22,6 +29,7 @@ const LOCAL_STORAGE_KEY: string = 'teams';
 export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
   const isTeamFollowed: boolean = isTeamSaved(LOCAL_STORAGE_KEY, team.id);
   const [isActive, setIsActive] = React.useState<boolean>(isTeamFollowed);
+  const [activeTab, setActiveTab] = React.useState<TeamTabs>(TeamTabs.OVERVIEW);
 
   // Save or remove team on button click.
   // To avoid duplicates, it first checks if team is saved already
@@ -52,6 +60,21 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
 
   const getTeamCoach = (): IPlayer =>
     team.squad.filter(p => p.role === 'COACH')[0];
+
+  const renderTabs = (): JSX.Element => (
+    <Tabs>
+      <Tab
+        isActive={activeTab === TeamTabs.OVERVIEW}
+        onClick={() => setActiveTab(TeamTabs.OVERVIEW)}
+        label='Overview'
+      />
+      <Tab
+        isActive={activeTab === TeamTabs.MATCHES}
+        onClick={() => setActiveTab(TeamTabs.MATCHES)}
+        label='Matches'
+      />
+    </Tabs>
+  );
 
   const renderTeamInfoTopRows = (): JSX.Element => (
     <React.Fragment>
@@ -93,6 +116,7 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
 
   return (
     <div className='team-info-container'>
+      {renderTabs()}
       {renderTeamInfoTopRows()}
       {renderInfoRows()}
       {team.squad.length > 0 && <Players players={team.squad} />}

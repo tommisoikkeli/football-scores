@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './App.css';
+import './App.scss';
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient, { InMemoryCache } from 'apollo-boost';
 import { Home } from './Views/Home/Home';
