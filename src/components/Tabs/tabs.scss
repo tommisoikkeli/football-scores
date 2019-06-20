@@ -17,6 +17,7 @@
     font-size: 14px;
     z-index: 1;
     box-shadow: $tab-box-shadow;
+    letter-spacing: 0.4px;
 
     &:hover {
       background: darken($background-grey, 2%);
@@ -24,8 +25,8 @@
 
     &.active {
       font-weight: bold;
-      background: $page-background;
-      border-bottom-color: $page-background;
+      background: $white;
+      border-bottom-color: $white;
     }
   }
 }
