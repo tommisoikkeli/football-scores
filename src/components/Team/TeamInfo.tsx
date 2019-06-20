@@ -66,12 +66,12 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
       <Tab
         isActive={activeTab === TeamTabs.OVERVIEW}
         onClick={() => setActiveTab(TeamTabs.OVERVIEW)}
-        label='Overview'
+        label={TeamTabs.OVERVIEW}
       />
       <Tab
         isActive={activeTab === TeamTabs.MATCHES}
         onClick={() => setActiveTab(TeamTabs.MATCHES)}
-        label='Matches'
+        label={TeamTabs.MATCHES}
       />
     </Tabs>
   );

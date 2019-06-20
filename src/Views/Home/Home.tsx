@@ -17,12 +17,12 @@ export const Home: React.FC = () => {
       <Tabs>
         <Tab
           isActive={active === HomeTabs.HOME}
-          label={'Home'}
+          label={HomeTabs.HOME}
           onClick={() => setActive(HomeTabs.HOME)}
         />
         <Tab
           isActive={active === HomeTabs.SAVED}
-          label='Saved'
+          label={HomeTabs.SAVED}
           onClick={() => setActive(HomeTabs.SAVED)}
         />
       </Tabs>
