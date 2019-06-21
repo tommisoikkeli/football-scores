@@ -58,3 +58,29 @@
     font-size: 18px;
   }
 }
+
+.followed-teams-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+
+  .followed-team {
+    display: flex;
+    width: 360px;
+    justify-content: space-between;
+    border: 1px solid $border-grey;
+    border-radius: 3px;
+    padding: 15px;
+    cursor: pointer;
+
+    &:hover {
+      background: darken($white, 2%);
+    }
+    
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}

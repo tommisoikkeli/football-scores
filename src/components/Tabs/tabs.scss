@@ -3,11 +3,13 @@
 .tabs-container {
   display: flex;
   justify-content: center;
-  padding-top: 20px;
+  padding-top: 25px;
   background: $background-grey;
   align-self: stretch;
 
   .tab {
+    display: flex;
+    justify-content: flex-start;
     border: 1px solid $border-grey;
     padding: 10px;
     margin-right: 8px;
@@ -18,6 +20,14 @@
     z-index: 1;
     box-shadow: $tab-box-shadow;
     letter-spacing: 0.4px;
+
+    > span {
+      flex: 1;
+    }
+
+    i {
+      font-size: 18px;
+    }
 
     &:hover {
       background: darken($background-grey, 2%);

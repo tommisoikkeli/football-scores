@@ -67,11 +67,13 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
         isActive={activeTab === TeamTabs.OVERVIEW}
         onClick={() => setActiveTab(TeamTabs.OVERVIEW)}
         label={TeamTabs.OVERVIEW}
+        icon='info'
       />
       <Tab
         isActive={activeTab === TeamTabs.MATCHES}
         onClick={() => setActiveTab(TeamTabs.MATCHES)}
         label={TeamTabs.MATCHES}
+        icon='schedule'
       />
     </Tabs>
   );
