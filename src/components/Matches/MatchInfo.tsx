@@ -37,40 +37,46 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({ match, activeTeam }) => {
     }
   };
 
+  const renderMatchHeader = (): JSX.Element => (
+    <div className='match-info-header'>
+      <Link
+        to={{
+          pathname: `/competition/${competition.id}`,
+          state: { competition }
+        }}>
+        <Text>{competition.name}</Text>
+      </Link>
+      <Text>
+        {parseDate(new Date(utcDate))} {parseTime(new Date(utcDate))}
+      </Text>
+      {matchday ? (
+        <Text>Matchday {matchday}</Text>
+      ) : (
+        <Text>{capitalize(stage.replace(/_/g, ' '))}</Text>
+      )}
+    </div>
+  );
+
+  const renderMatchResult = (): JSX.Element => (
+    <div className='match-result'>
+      <span
+        className={`team-name ${score.winner === 'HOME_TEAM' ? 'winner' : ''}`}>
+        {homeTeam.name}
+      </span>
+      <span className='score'>{score.fullTime.homeTeam}</span>
+      <span className='score'>-</span>
+      <span className='score'>{score.fullTime.awayTeam}</span>
+      <span
+        className={`team-name ${score.winner === 'AWAY_TEAM' ? 'winner' : ''}`}>
+        {awayTeam.name}
+      </span>
+    </div>
+  );
+
   return (
     <div className={`match-info-container ${getResultClass()}`}>
-      <div className='match-info-header'>
-        <Link
-          to={{
-            pathname: `/competition/${competition.id}`,
-            state: { competition }
-          }}>
-          <Text>{competition.name}</Text>
-        </Link>
-        <Text>{parseDate(new Date(utcDate))} {parseTime(new Date(utcDate))}</Text>
-        {matchday ? (
-          <Text>Matchday {matchday}</Text>
-        ) : (
-          <Text>{capitalize(stage.replace(/_/g, ' '))}</Text>
-        )}
-      </div>
-      <div className='match-result'>
-        <span
-          className={`team-name ${
-            score.winner === 'HOME_TEAM' ? 'winner' : ''
-          }`}>
-          {homeTeam.name}
-        </span>
-        <span className='score'>{score.fullTime.homeTeam}</span>
-        <span className='score'>-</span>
-        <span className='score'>{score.fullTime.awayTeam}</span>
-        <span
-          className={`team-name ${
-            score.winner === 'AWAY_TEAM' ? 'winner' : ''
-          }`}>
-          {awayTeam.name}
-        </span>
-      </div>
+      {renderMatchHeader()}
+      {renderMatchResult()}
     </div>
   );
 };
