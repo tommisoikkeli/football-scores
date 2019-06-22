@@ -1,0 +1,52 @@
+@import '../../styles/variables.scss';
+
+.match-info-container {
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 3px;
+  border: 1px solid $border-grey;
+  width: 430px;
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 0;
+    display: block;
+    width: 3px;
+    height: 100%;
+  }
+
+  &.win:after {
+    background: $win-green;
+  }
+
+  &.loss:after {
+    background: $loss-red;
+  }
+
+  &.draw:after {
+    background: $draw-yellow;
+  }
+
+  .match-info-header {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+  }
+
+  .match-result {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+
+    .team-name {
+      font-weight: normal;
+
+      &.winner {
+        font-weight: bold;
+      }
+    }
+  }
+}

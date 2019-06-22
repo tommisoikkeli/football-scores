@@ -4,6 +4,13 @@ export function splitString(string: string, separator: string): string[] {
   return string.split(separator);
 }
 
+export function parseDate(date: Date): string {
+  const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+  const month = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+  const year = date.getFullYear();
+  return `${day}.${month}.${year}`;
+}
+
 export function shouldAddGoat(player: string): boolean {
   return player === 'Lionel Messi';
 }

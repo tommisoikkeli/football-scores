@@ -14,6 +14,7 @@ import { ColorBall } from './ColorBall';
 import { Button, ButtonType } from '../Button/Button';
 import { Tabs } from '../Tabs/Tabs';
 import { Tab } from '../Tabs/Tab';
+import { Matches } from '../../Views/Matches/Matches';
 
 interface ITeamInfoProps {
   team: ITeam;
@@ -116,12 +117,24 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
     </React.Fragment>
   );
 
+  const renderContent = (): JSX.Element => {
+    if (activeTab === TeamTabs.OVERVIEW) {
+      return (
+        <React.Fragment>
+          {renderTeamInfoTopRows()}
+          {renderInfoRows()}
+          {team.squad.length > 0 && <Players players={team.squad} />}
+        </React.Fragment>
+      );
+    } else {
+      return <Matches id={team.id} activeTeam={team.name} />;
+    }
+  };
+
   return (
     <div className='team-info-container'>
       {renderTabs()}
-      {renderTeamInfoTopRows()}
-      {renderInfoRows()}
-      {team.squad.length > 0 && <Players players={team.squad} />}
+      {renderContent()}
     </div>
   );
 };

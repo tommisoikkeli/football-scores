@@ -20,7 +20,7 @@ interface IStandingsTypes {
   standings: IStandings[];
 }
 
-interface ISeason {
+export interface ISeason {
   id: number;
   startDate: string;
   endDate: string;

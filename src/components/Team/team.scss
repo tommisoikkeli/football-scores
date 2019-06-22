@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
+
   img {
     width: 100px;
     height: 100px;
@@ -66,9 +66,7 @@
   margin: 15px;
 
   .followed-team {
-    display: flex;
     width: 360px;
-    justify-content: space-between;
     border: 1px solid $border-grey;
     border-radius: 3px;
     padding: 15px;
@@ -77,10 +75,28 @@
     &:hover {
       background: darken($white, 2%);
     }
-    
-    img {
-      width: 30px;
-      height: 30px;
+
+    .followed-team-header {
+      display: flex;
+      justify-content: space-between;
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .followed-team-content {
+      display: none;
+      margin-top: 10px;
+      margin-bottom: -10px;
+      border-top: 1px solid $border-grey;
+    }
+
+    &.active {
+      .followed-team-content {
+        display: block;
+      }
     }
   }
 }
