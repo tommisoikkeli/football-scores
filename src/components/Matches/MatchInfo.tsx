@@ -44,7 +44,7 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({ match, activeTeam }) => {
           pathname: `/competition/${competition.id}`,
           state: { competition }
         }}>
-        <Text>{competition.name}</Text>
+        <span>{competition.name}</span>
       </Link>
       <Text>
         {parseDate(new Date(utcDate))} {parseTime(new Date(utcDate))}
@@ -63,9 +63,11 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({ match, activeTeam }) => {
         className={`team-name ${score.winner === 'HOME_TEAM' ? 'winner' : ''}`}>
         {homeTeam.name}
       </span>
-      <span className='score'>{score.fullTime.homeTeam}</span>
-      <span className='score'>-</span>
-      <span className='score'>{score.fullTime.awayTeam}</span>
+      <div className='score-block'>
+        <span className='score'>{score.fullTime.homeTeam}</span>
+        <span className='score'>-</span>
+        <span className='score'>{score.fullTime.awayTeam}</span>
+      </div>
       <span
         className={`team-name ${score.winner === 'AWAY_TEAM' ? 'winner' : ''}`}>
         {awayTeam.name}

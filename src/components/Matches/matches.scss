@@ -38,14 +38,21 @@
   .match-info-header {
     display: flex;
     justify-content: space-around;
+    align-items: center;
 
     p {
       font-size: 14px;
       margin-bottom: 5px;
     }
 
-    a:hover {
-      text-decoration: underline;
+    a {
+      font-size: 14px;
+      margin-top: 5px;
+      color: $link-blue;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -56,6 +63,7 @@
     padding-top: 10px;
 
     .team-name {
+      flex: 1;
       font-weight: normal;
 
       &.winner {
@@ -63,8 +71,14 @@
       }
     }
 
-    .score {
-      font-size: 22px;
+    .score-block {
+      display: flex;
+      width: 60px;
+      justify-content: space-between;
+
+      .score {
+        font-size: 22px;
+      }
     }
   }
 }
