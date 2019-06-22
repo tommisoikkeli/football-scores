@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { IMatch } from '../../models/matches';
 import './matches.scss';
-import { parseDate } from '../../utils/utils';
+import { parseDate, parseTime, capitalize } from '../../utils/utils';
+import { Link } from 'react-router-dom';
+import { Text } from '../Text/Text';
 
 interface IMatchInfoProps {
   match: IMatch;
@@ -28,20 +30,28 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({ match, activeTeam }) => {
       return 'loss';
     } else if (score.winner === 'AWAY_TEAM' && awayTeam.name !== activeTeam) {
       return 'loss';
-    } else {
+    } else if (score.winner === 'DRAW') {
       return 'draw';
+    } else {
+      return 'scheduled';
     }
   };
 
   return (
     <div className={`match-info-container ${getResultClass()}`}>
       <div className='match-info-header'>
-        <span>{competition.name}</span>
-        <span>{parseDate(new Date(utcDate))}</span>
+        <Link
+          to={{
+            pathname: `/competition/${competition.id}`,
+            state: { competition }
+          }}>
+          <Text>{competition.name}</Text>
+        </Link>
+        <Text>{parseDate(new Date(utcDate))} {parseTime(new Date(utcDate))}</Text>
         {matchday ? (
-          <span>Matchday {matchday}</span>
+          <Text>Matchday {matchday}</Text>
         ) : (
-          <span>{stage.replace(/_/g, ' ')}</span>
+          <Text>{capitalize(stage.replace(/_/g, ' '))}</Text>
         )}
       </div>
       <div className='match-result'>
@@ -51,9 +61,9 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({ match, activeTeam }) => {
           }`}>
           {homeTeam.name}
         </span>
-        <span>{score.fullTime.homeTeam}</span>
-        <span>-</span>
-        <span>{score.fullTime.awayTeam}</span>
+        <span className='score'>{score.fullTime.homeTeam}</span>
+        <span className='score'>-</span>
+        <span className='score'>{score.fullTime.awayTeam}</span>
         <span
           className={`team-name ${
             score.winner === 'AWAY_TEAM' ? 'winner' : ''
