@@ -47,12 +47,17 @@
 
     a {
       font-size: 14px;
+      flex: 1;
       margin-top: 5px;
       color: $link-blue;
 
       &:hover {
         text-decoration: underline;
       }
+    }
+
+    .matchday {
+      flex: 1;
     }
   }
 

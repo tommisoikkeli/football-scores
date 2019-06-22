@@ -49,11 +49,13 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({ match, activeTeam }) => {
       <Text>
         {parseDate(new Date(utcDate))} {parseTime(new Date(utcDate))}
       </Text>
-      {matchday ? (
-        <Text>Matchday {matchday}</Text>
-      ) : (
-        <Text>{capitalize(stage.replace(/_/g, ' '))}</Text>
-      )}
+      <div className='matchday'>
+        {matchday ? (
+          <Text>Matchday {matchday}</Text>
+        ) : (
+          <Text>{capitalize(stage.replace(/_/g, ' '))}</Text>
+        )}
+      </div>
     </div>
   );
 
