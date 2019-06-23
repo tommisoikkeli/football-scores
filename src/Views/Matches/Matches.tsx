@@ -24,7 +24,7 @@ interface IMatchesProps {
   activeTeam: string;
 }
 
-const filterOptions: string[]= [
+const filterOptions: string[] = [
   'All',
   'Wins',
   'Draws',
