@@ -8,7 +8,7 @@ import {
 import { MATCHES_QUERY } from './queries';
 import { Loading } from '../../components/Loading/Loading';
 import { MatchInfo } from '../../components/Matches/MatchInfo';
-import { Dropdown, IDropdownOption } from '../../components/Dropdown/Dropdown';
+import { Dropdown } from '../../components/Dropdown/Dropdown';
 import {
   isHomeTeamWin,
   isHomeTeamActiveTeam,
@@ -24,23 +24,11 @@ interface IMatchesProps {
   activeTeam: string;
 }
 
-const filterOptions: IDropdownOption[] = [
-  {
-    label: 'All',
-    value: 'All'
-  },
-  {
-    label: 'Wins',
-    value: 'Wins'
-  },
-  {
-    label: 'Draws',
-    value: 'Draws'
-  },
-  {
-    label: 'Losses',
-    value: 'Losses'
-  }
+const filterOptions: string[]= [
+  'All',
+  'Wins',
+  'Draws',
+  'Losses'
 ];
 
 export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {

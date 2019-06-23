@@ -3,13 +3,8 @@ import './dropdown.scss';
 
 interface IDropdownProps {
   label: string;
-  options: IDropdownOption[];
+  options: string[];
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-}
-
-export interface IDropdownOption {
-  label: string;
-  value: string;
 }
 
 export const Dropdown: React.FC<IDropdownProps> = ({
@@ -18,9 +13,9 @@ export const Dropdown: React.FC<IDropdownProps> = ({
   onChange
 }) => {
   const getOptions = (): JSX.Element[] => {
-    return options.map((o: IDropdownOption, i: number) => (
-      <option key={`options-${i}`} value={o.value}>
-        {o.label}
+    return options.map((o: string, i: number) => (
+      <option key={`options-${i}`} value={o}>
+        {o}
       </option>
     ));
   };
