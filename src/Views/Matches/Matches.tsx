@@ -41,7 +41,7 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
     let filteredMatches: IMatch[] = [];
     const { value } = event.target;
 
-    value === 'All' ? setIsFilterActive(false) : setIsFilterActive(true);
+    setIsFilterActive(value !== 'All' ? true : false);
 
     // Wins.
     // Return matches where active team is the winning team (home or away).
