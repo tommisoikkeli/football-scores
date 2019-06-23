@@ -19,11 +19,7 @@ export const Dropdown: React.FC<IDropdownProps> = ({
 }) => {
   const getOptions = (): JSX.Element[] => {
     return options.map((o: IDropdownOption, i: number) => (
-      <option
-        className='dropdown-option'
-        key={`options-${i}`}
-        value={o.value}
-        >
+      <option key={`options-${i}`} value={o.value}>
         {o.label}
       </option>
     ));
@@ -34,7 +30,9 @@ export const Dropdown: React.FC<IDropdownProps> = ({
       <div className='dropdown-label'>
         <label>{label}</label>
       </div>
-      <select className='dropdown' onChange={onChange}>{getOptions()}</select>
+      <select className='dropdown' onChange={onChange}>
+        {getOptions()}
+      </select>
       <i className='material-icons-outlined'>arrow_drop_down</i>
     </div>
   );

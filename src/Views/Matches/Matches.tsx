@@ -55,31 +55,35 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
 
     value === 'All' ? setIsFilterActive(false) : setIsFilterActive(true);
 
-    // wins
+    // Wins.
+    // Return matches where active team is the winning team (home or away).
     if (value === 'Wins') {
-      matches.forEach((m: IMatch) => {
-        if (isHomeTeamWin(m) && isHomeTeamActiveTeam(m, activeTeam)) {
-          filteredMatches = [...filteredMatches, m];
+      filteredMatches = matches.filter((m: IMatch) => {
+        if (isHomeTeamWin(m)) {
+          return isHomeTeamActiveTeam(m, activeTeam);
         }
-        if (isAwayTeamWin(m) && isAwayTeamActiveTeam(m, activeTeam)) {
-          filteredMatches = [...filteredMatches, m];
+        if (isAwayTeamWin(m)) {
+          return isAwayTeamActiveTeam(m, activeTeam);
         }
+        return false;
       });
     }
 
-    // losses
+    // Losses.
+    // Return matches where active team is the losing team (home or away).
     if (value === 'Losses') {
-      matches.forEach((m: IMatch) => {
-        if (isHomeTeamWin(m) && !isHomeTeamActiveTeam(m, activeTeam)) {
-          filteredMatches = [...filteredMatches, m];
+      filteredMatches = matches.filter((m: IMatch) => {
+        if (isHomeTeamWin(m)) {
+          return !isHomeTeamActiveTeam(m, activeTeam);
         }
-        if (isAwayTeamWin(m) && !isAwayTeamActiveTeam(m, activeTeam)) {
-          filteredMatches = [...filteredMatches, m];
+        if (isAwayTeamWin(m)) {
+          return !isAwayTeamActiveTeam(m, activeTeam);
         }
+        return false;
       });
     }
 
-    // draws
+    // Draws.
     if (value === 'Draws') {
       filteredMatches = matches.filter((m: IMatch) => isDraw(m));
     }
