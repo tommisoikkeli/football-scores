@@ -4,6 +4,13 @@ import './matches.scss';
 import { parseDate, parseTime, capitalize } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import { Text } from '../Text/Text';
+import {
+  isHomeTeamWin,
+  isAwayTeamWin,
+  isDraw,
+  isHomeTeamActiveTeam,
+  isAwayTeamActiveTeam
+} from './matchesHelpers';
 
 interface IMatchInfoProps {
   match: IMatch;
@@ -22,15 +29,15 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({ match, activeTeam }) => {
   } = match;
 
   const getResultClass = (): string => {
-    if (score.winner === 'HOME_TEAM' && homeTeam.name === activeTeam) {
+    if (isHomeTeamWin(match) && isHomeTeamActiveTeam(match, activeTeam)) {
       return 'win';
-    } else if (score.winner === 'AWAY_TEAM' && awayTeam.name === activeTeam) {
+    } else if (isAwayTeamWin(match) && isAwayTeamActiveTeam(match, activeTeam)) {
       return 'win';
-    } else if (score.winner === 'HOME_TEAM' && homeTeam.name !== activeTeam) {
+    } else if (isHomeTeamWin(match) && !isHomeTeamActiveTeam(match, activeTeam)) {
       return 'loss';
-    } else if (score.winner === 'AWAY_TEAM' && awayTeam.name !== activeTeam) {
+    } else if (isAwayTeamWin(match) && !isAwayTeamActiveTeam(match, activeTeam)) {
       return 'loss';
-    } else if (score.winner === 'DRAW') {
+    } else if (isDraw(match)) {
       return 'draw';
     } else {
       return 'scheduled';

@@ -1,0 +1,39 @@
+@import '../../styles/variables.scss';
+
+.dropdown-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  position: relative;
+
+  .dropdown-label {
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 10px;
+    margin-left: 25px;
+  }
+
+  .dropdown {
+    width: 150px;
+    height: 35px;
+    appearance: none;
+    padding: 10px;
+    outline: none;
+    border-radius: 2px;
+    cursor: pointer;
+    background: $white;
+    border: 1px solid $border-grey;
+
+    &:hover {
+      background: darken($white, 2%);
+    }
+  }
+
+  i {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    font-size: 18px;
+    pointer-events: none;
+  }
+}
