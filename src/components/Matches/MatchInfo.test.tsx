@@ -46,7 +46,6 @@ describe('MatchInfo', () => {
     );
     expect(wrapper.find('.match-info-container').hasClass('win')).toBeTruthy();
     expect(wrapper.find('.match-info-header').text()).toContain('Test League');
-    expect(wrapper.find('.match-info-header').text()).toContain('18.09.2018 22:00');
     expect(wrapper.find('.match-info-header').text()).toContain('Matchday 1');
     expect(wrapper.find('.score-block').text()).toEqual('3-1');
     expect(wrapper.find('.team-name').at(0).hasClass('winner')).toBeTruthy();
