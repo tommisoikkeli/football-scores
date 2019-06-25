@@ -35,10 +35,9 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
 
   const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
-
+    
     // If selection is 'All', show all matches, otherwise filtered results.
     setIsFilterActive(value !== 'All' ? true : false);
-
     setFilteredMatches(filterMatches(matches, value, activeTeam));
   };
 
