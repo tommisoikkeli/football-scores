@@ -9,13 +9,7 @@ import { MATCHES_QUERY } from './queries';
 import { Loading } from '../../components/Loading/Loading';
 import { MatchInfo } from '../../components/Matches/MatchInfo';
 import { Dropdown } from '../../components/Dropdown/Dropdown';
-import {
-  isHomeTeamWin,
-  isHomeTeamActiveTeam,
-  isAwayTeamWin,
-  isAwayTeamActiveTeam,
-  isDraw
-} from '../../components/Matches/matchesHelpers';
+import { filterMatches } from '../../components/Matches/matchesHelpers';
 import { Text } from '../../components/Text/Text';
 import './matches-view.scss';
 
@@ -28,7 +22,9 @@ const filterOptions: string[] = [
   'All',
   'Wins',
   'Draws',
-  'Losses'
+  'Losses',
+  'Finished',
+  'Upcoming'
 ];
 
 export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
@@ -37,46 +33,13 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
   const [isFilterActive, setIsFilterActive] = React.useState<boolean>(false);
   const matchesToShow = isFilterActive ? filteredMatches : matches;
 
-  const filterMatches = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    let filteredMatches: IMatch[] = [];
+  const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
 
+    // If selection is 'All', show all matches, otherwise filtered results.
     setIsFilterActive(value !== 'All' ? true : false);
 
-    // Wins.
-    // Return matches where active team is the winning team (home or away).
-    if (value === 'Wins') {
-      filteredMatches = matches.filter((m: IMatch) => {
-        if (isHomeTeamWin(m)) {
-          return isHomeTeamActiveTeam(m, activeTeam);
-        }
-        if (isAwayTeamWin(m)) {
-          return isAwayTeamActiveTeam(m, activeTeam);
-        }
-        return false;
-      });
-    }
-
-    // Losses.
-    // Return matches where active team is the losing team (home or away).
-    if (value === 'Losses') {
-      filteredMatches = matches.filter((m: IMatch) => {
-        if (isHomeTeamWin(m)) {
-          return !isHomeTeamActiveTeam(m, activeTeam);
-        }
-        if (isAwayTeamWin(m)) {
-          return !isAwayTeamActiveTeam(m, activeTeam);
-        }
-        return false;
-      });
-    }
-
-    // Draws.
-    if (value === 'Draws') {
-      filteredMatches = matches.filter((m: IMatch) => isDraw(m));
-    }
-
-    setFilteredMatches(filteredMatches);
+    setFilteredMatches(filterMatches(matches, value, activeTeam));
   };
 
   const getMatchCount = (): string =>
@@ -94,7 +57,7 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
           <React.Fragment>
             <div className='matches-header-section'>
               <Dropdown
-                onChange={event => filterMatches(event)}
+                onChange={event => onSelectChange(event)}
                 label='Filter'
                 options={filterOptions}
               />

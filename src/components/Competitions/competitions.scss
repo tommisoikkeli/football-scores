@@ -24,21 +24,20 @@
     height: 180px;
     position: relative;
     cursor: pointer;
+    transition: all 0.3s ease;
 
-    &:hover:after {
-      content: '';
-      display: block;
-      height: 100%;
-      width: 3px;
-      background: $header-background;
-      position: absolute;
-      top: 0;
-      left: 0;
+    &:hover {
+      transform: scale(1.06);
+      
+      .competition-image {
+        transform: scale(1.06);
+      }
     }
 
     .competition-image {
       width: 100px;
       height: 100px;
+      transition: all 0.3s ease;
     }
 
     .competition-card-footer {

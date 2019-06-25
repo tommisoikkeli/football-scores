@@ -41,3 +41,8 @@ export interface IMatchesQuery {
 export interface IMatchesQueryVariables {
   id: number;
 }
+
+export enum MatchStatus {
+  FINISHED = 'FINISHED',
+  SCHEDULED = 'SCHEDULED'
+}
