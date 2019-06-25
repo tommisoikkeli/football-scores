@@ -29,17 +29,12 @@ const filterOptions: string[] = [
 
 export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
   const [matches, setMatches] = React.useState<IMatch[]>([]);
-  const [filteredMatches, setFilteredMatches] = React.useState<IMatch[]>([]);
-  const [isFilterActive, setIsFilterActive] = React.useState<boolean>(false);
-  const matchesToShow = isFilterActive ? filteredMatches : matches;
+  const [filter, setFilter] = React.useState<string>('All');
+  const matchesToShow =
+    filter !== 'All' ? filterMatches(matches, filter, activeTeam) : matches;
 
-  const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
-    const { value } = event.target;
-
-    // If selection is 'All', show all matches, otherwise filtered results.
-    setIsFilterActive(value !== 'All' ? true : false);
-    setFilteredMatches(filterMatches(matches, value, activeTeam));
-  };
+  const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>): void =>
+    setFilter(event.target.value);
 
   const getMatchCount = (): string =>
     matchesToShow.length === 1 ? '1 match' : `${matchesToShow.length} matches`;
