@@ -33,9 +33,6 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
   const matchesToShow =
     filter !== 'All' ? filterMatches(matches, filter, activeTeam) : matches;
 
-  const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>): void =>
-    setFilter(event.target.value);
-
   const getMatchCount = (): string =>
     matchesToShow.length === 1 ? '1 match' : `${matchesToShow.length} matches`;
 
@@ -51,7 +48,7 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
           <React.Fragment>
             <div className='matches-header-section'>
               <Dropdown
-                onChange={event => onSelectChange(event)}
+                onChange={event => setFilter(event.target.value)}
                 label='Filter'
                 options={filterOptions}
               />

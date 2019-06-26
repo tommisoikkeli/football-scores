@@ -19,9 +19,7 @@ export const FollowedTeam: React.FC<IFollowedTeamProps> = ({
     <div className='followed-team-header'>
       <TeamCrest crestUrl={team.crestUrl} />
       {team.name}
-      <i className='material-icons-outlined'>
-        {isActive ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
-      </i>
+      <i className='material-icons-outlined'>keyboard_arrow_down</i>
     </div>
     <div className='followed-team-content'>
       <p>content</p>

@@ -79,10 +79,15 @@
     .followed-team-header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
 
       img {
         width: 30px;
         height: 30px;
+      }
+
+      i {
+        transition: transform 0.2s ease-in-out;
       }
     }
 
@@ -96,6 +101,10 @@
     &.active {
       .followed-team-content {
         display: block;
+      }
+
+      i {
+        transform: rotate(180deg);
       }
     }
   }
