@@ -8,11 +8,15 @@ export const isAwayTeamWin = (match: IMatch): boolean =>
 
 export const isDraw = (match: IMatch): boolean => match.score.winner === 'DRAW';
 
-export const isHomeTeamActiveTeam = (match: IMatch, activeTeam: string) =>
-  match.homeTeam.name === activeTeam;
+export const isHomeTeamActiveTeam = (
+  match: IMatch,
+  activeTeam: string
+): boolean => match.homeTeam.name === activeTeam;
 
-export const isAwayTeamActiveTeam = (match: IMatch, activeTeam: string) =>
-  match.awayTeam.name === activeTeam;
+export const isAwayTeamActiveTeam = (
+  match: IMatch,
+  activeTeam: string
+): boolean => match.awayTeam.name === activeTeam;
 
 export const filterWins = (matches: IMatch[], activeTeam: string): IMatch[] => {
   return matches.filter((m: IMatch) => {
@@ -80,4 +84,20 @@ export const filterMatches = (
       break;
   }
   return results;
+};
+
+export const getResultClass = (match: IMatch, activeTeam: string): string => {
+  if (isHomeTeamWin(match) && isHomeTeamActiveTeam(match, activeTeam)) {
+    return 'win';
+  } else if (isAwayTeamWin(match) && isAwayTeamActiveTeam(match, activeTeam)) {
+    return 'win';
+  } else if (isHomeTeamWin(match) && !isHomeTeamActiveTeam(match, activeTeam)) {
+    return 'loss';
+  } else if (isAwayTeamWin(match) && !isAwayTeamActiveTeam(match, activeTeam)) {
+    return 'loss';
+  } else if (isDraw(match)) {
+    return 'draw';
+  } else {
+    return 'scheduled';
+  }
 };

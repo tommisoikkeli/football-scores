@@ -4,13 +4,7 @@ import './matches.scss';
 import { parseDate, parseTime, capitalize } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import { Text } from '../Text/Text';
-import {
-  isHomeTeamWin,
-  isAwayTeamWin,
-  isDraw,
-  isHomeTeamActiveTeam,
-  isAwayTeamActiveTeam
-} from './matchesHelpers';
+import { getResultClass } from './matchesHelpers';
 
 interface IMatchInfoProps {
   match: IMatch;
@@ -27,22 +21,6 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({ match, activeTeam }) => {
     awayTeam,
     score
   } = match;
-
-  const getResultClass = (): string => {
-    if (isHomeTeamWin(match) && isHomeTeamActiveTeam(match, activeTeam)) {
-      return 'win';
-    } else if (isAwayTeamWin(match) && isAwayTeamActiveTeam(match, activeTeam)) {
-      return 'win';
-    } else if (isHomeTeamWin(match) && !isHomeTeamActiveTeam(match, activeTeam)) {
-      return 'loss';
-    } else if (isAwayTeamWin(match) && !isAwayTeamActiveTeam(match, activeTeam)) {
-      return 'loss';
-    } else if (isDraw(match)) {
-      return 'draw';
-    } else {
-      return 'scheduled';
-    }
-  };
 
   const renderMatchHeader = (): JSX.Element => (
     <div className='match-info-header'>
@@ -85,7 +63,8 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({ match, activeTeam }) => {
   );
 
   return (
-    <div className={`match-info-container ${getResultClass()}`}>
+    <div
+      className={`match-info-container ${getResultClass(match, activeTeam)}`}>
       {renderMatchHeader()}
       {renderMatchResult()}
     </div>
