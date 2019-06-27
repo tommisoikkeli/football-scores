@@ -8,15 +8,11 @@ const isAwayTeamWin = (match: IMatch): boolean =>
 
 const isDraw = (match: IMatch): boolean => match.score.winner === 'DRAW';
 
-const isHomeTeamActiveTeam = (
-  match: IMatch,
-  activeTeam: string
-): boolean => match.homeTeam.name === activeTeam;
+const isHomeTeamActiveTeam = (match: IMatch, activeTeam: string): boolean =>
+  match.homeTeam.name === activeTeam;
 
-const isAwayTeamActiveTeam = (
-  match: IMatch,
-  activeTeam: string
-): boolean => match.awayTeam.name === activeTeam;
+const isAwayTeamActiveTeam = (match: IMatch, activeTeam: string): boolean =>
+  match.awayTeam.name === activeTeam;
 
 const filterWins = (matches: IMatch[], activeTeam: string): IMatch[] => {
   return matches.filter((m: IMatch) => {
@@ -30,10 +26,7 @@ const filterWins = (matches: IMatch[], activeTeam: string): IMatch[] => {
   });
 };
 
-const filterLosses = (
-  matches: IMatch[],
-  activeTeam: string
-): IMatch[] => {
+const filterLosses = (matches: IMatch[], activeTeam: string): IMatch[] => {
   return matches.filter((m: IMatch) => {
     if (isHomeTeamWin(m)) {
       return !isHomeTeamActiveTeam(m, activeTeam);
@@ -49,10 +42,7 @@ const filterDraws = (matches: IMatch[]): IMatch[] => {
   return matches.filter((m: IMatch) => isDraw(m));
 };
 
-const filterByStatus = (
-  matches: IMatch[],
-  status: MatchStatus
-): IMatch[] => {
+const filterByStatus = (matches: IMatch[], status: MatchStatus): IMatch[] => {
   return matches.filter((m: IMatch) => m.status === status);
 };
 
