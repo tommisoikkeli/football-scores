@@ -1,24 +1,24 @@
 import { IMatch, MatchStatus } from '../../models/matches';
 
-export const isHomeTeamWin = (match: IMatch): boolean =>
+const isHomeTeamWin = (match: IMatch): boolean =>
   match.score.winner === 'HOME_TEAM';
 
-export const isAwayTeamWin = (match: IMatch): boolean =>
+const isAwayTeamWin = (match: IMatch): boolean =>
   match.score.winner === 'AWAY_TEAM';
 
-export const isDraw = (match: IMatch): boolean => match.score.winner === 'DRAW';
+const isDraw = (match: IMatch): boolean => match.score.winner === 'DRAW';
 
-export const isHomeTeamActiveTeam = (
+const isHomeTeamActiveTeam = (
   match: IMatch,
   activeTeam: string
 ): boolean => match.homeTeam.name === activeTeam;
 
-export const isAwayTeamActiveTeam = (
+const isAwayTeamActiveTeam = (
   match: IMatch,
   activeTeam: string
 ): boolean => match.awayTeam.name === activeTeam;
 
-export const filterWins = (matches: IMatch[], activeTeam: string): IMatch[] => {
+const filterWins = (matches: IMatch[], activeTeam: string): IMatch[] => {
   return matches.filter((m: IMatch) => {
     if (isHomeTeamWin(m)) {
       return isHomeTeamActiveTeam(m, activeTeam);
@@ -30,7 +30,7 @@ export const filterWins = (matches: IMatch[], activeTeam: string): IMatch[] => {
   });
 };
 
-export const filterLosses = (
+const filterLosses = (
   matches: IMatch[],
   activeTeam: string
 ): IMatch[] => {
@@ -45,11 +45,11 @@ export const filterLosses = (
   });
 };
 
-export const filterDraws = (matches: IMatch[]): IMatch[] => {
+const filterDraws = (matches: IMatch[]): IMatch[] => {
   return matches.filter((m: IMatch) => isDraw(m));
 };
 
-export const filterByStatus = (
+const filterByStatus = (
   matches: IMatch[],
   status: MatchStatus
 ): IMatch[] => {
