@@ -1,0 +1,13 @@
+.matches-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .matches-header-section {
+    display: flex;
+    justify-content: space-between;
+    width: 480px;
+    align-items: baseline;
+  }
+}

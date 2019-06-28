@@ -12,17 +12,9 @@ import {
 } from '../../utils/utils';
 import { ColorBall } from './ColorBall';
 import { Button, ButtonType } from '../Button/Button';
-import { Tabs } from '../Tabs/Tabs';
-import { Tab } from '../Tabs/Tab';
-import { Matches } from '../../Views/Matches/Matches';
 
 interface ITeamInfoProps {
   team: ITeam;
-}
-
-enum TeamTabs {
-  OVERVIEW = 'Overview',
-  MATCHES = 'Matches'
 }
 
 const LOCAL_STORAGE_KEY: string = 'teams';
@@ -30,7 +22,6 @@ const LOCAL_STORAGE_KEY: string = 'teams';
 export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
   const isTeamFollowed: boolean = isTeamSaved(LOCAL_STORAGE_KEY, team.id);
   const [isFollowed, setIsFollowed] = React.useState<boolean>(isTeamFollowed);
-  const [activeTab, setActiveTab] = React.useState<TeamTabs>(TeamTabs.OVERVIEW);
 
   // Save or remove team on button click.
   // To avoid duplicates, it first checks if team is saved already
@@ -61,23 +52,6 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
 
   const getTeamCoach = (): IPlayer =>
     team.squad.filter(p => p.role === 'COACH')[0];
-
-  const renderTabs = (): JSX.Element => (
-    <Tabs>
-      <Tab
-        isActive={activeTab === TeamTabs.OVERVIEW}
-        onClick={() => setActiveTab(TeamTabs.OVERVIEW)}
-        label={TeamTabs.OVERVIEW}
-        icon='info'
-      />
-      <Tab
-        isActive={activeTab === TeamTabs.MATCHES}
-        onClick={() => setActiveTab(TeamTabs.MATCHES)}
-        label={TeamTabs.MATCHES}
-        icon='schedule'
-      />
-    </Tabs>
-  );
 
   const renderTeamInfoTopRows = (): JSX.Element => (
     <React.Fragment>
@@ -117,23 +91,11 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
     </React.Fragment>
   );
 
-  const renderContent = (): JSX.Element => {
-    if (activeTab === TeamTabs.OVERVIEW) {
-      return (
-        <React.Fragment>
-          {renderTeamInfoTopRows()}
-          {renderInfoRows()}
-          {team.squad.length > 0 && <Players players={team.squad} />}
-        </React.Fragment>
-      );
-    }
-    return <Matches id={team.id} activeTeam={team.name} />;
-  };
-
   return (
     <div className='team-info-container'>
-      {renderTabs()}
-      {renderContent()}
+      {renderTeamInfoTopRows()}
+      {renderInfoRows()}
+      {team.squad.length > 0 && <Players players={team.squad} />}
     </div>
   );
 };
