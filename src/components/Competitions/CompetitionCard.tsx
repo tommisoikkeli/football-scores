@@ -10,11 +10,7 @@ export const CompetitionCard: React.FC<ICompetitionCardProps> = ({
   competition
 }) => (
   <div className='competition-card'>
-    <Link
-      to={{
-        pathname: `/competition/${competition.id}`,
-        state: { competition }
-      }}>
+    <Link to={`/competition/${competition.id}`}>
       <img
         className='competition-image'
         src={`/images/${competition.code}.png`}

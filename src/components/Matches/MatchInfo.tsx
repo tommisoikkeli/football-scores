@@ -24,11 +24,7 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({ match, activeTeam }) => {
 
   const renderMatchHeader = (): JSX.Element => (
     <div className='match-info-header'>
-      <Link
-        to={{
-          pathname: `/competition/${competition.id}`,
-          state: { competition }
-        }}>
+      <Link to={`/competition/${competition.id}`}>
         <span>{competition.name}</span>
       </Link>
       <Text>

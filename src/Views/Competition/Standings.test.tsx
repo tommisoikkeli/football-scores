@@ -80,29 +80,19 @@ const mocks = [
   }
 ];
 
-const location = {
-  hash: '',
-  key: '',
-  pathname: '',
-  search: '',
-  state: {
-    competition: {
-      name: 'Bleep league'
-    }
-  }
+const competition = {
+  id: 11,
+  name: 'Beep League'
 };
-
-const match = { params: { id: '2014' }, isExact: true, path: '', url: '' };
 
 describe('Standings', () => {
   let wrapper: any;
-  let mock: any = jest.fn();
 
   beforeEach(() => {
     wrapper = mount(
       <Router>
         <MockedProvider mocks={mocks} addTypename={false}>
-          <Standings match={match} location={location} history={mock} />
+          <Standings id={2014} />
         </MockedProvider>
       </Router>
     );

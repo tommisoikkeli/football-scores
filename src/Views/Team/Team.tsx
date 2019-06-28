@@ -19,7 +19,7 @@ export const Team: React.FC<ITeamProps> = props => {
 
         return (
           <React.Fragment>
-            {data && <TeamInfo team={data.team} />}
+            {<TeamInfo team={data.team} />}
           </React.Fragment>
         );
       }}

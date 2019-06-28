@@ -22,7 +22,7 @@ export const Competitions: React.FC = () => {
         if (error) return <div>Error</div>;
         return (
           <div className='competitions'>
-            {data && getCompetitionCards(data.competitions.competitions)}
+            {getCompetitionCards(data.competitions.competitions)}
           </div>
         );
       }}
