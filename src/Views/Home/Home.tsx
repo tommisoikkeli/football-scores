@@ -40,9 +40,8 @@ export const Home: React.FC = () => {
           <Competitions />
         </React.Fragment>
       );
-    } else {
-      return <Followed />;
     }
+    return <Followed />;
   };
 
   return (

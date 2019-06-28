@@ -16,6 +16,7 @@ export const STANDINGS_QUERY = gql`
         id
         startDate
         endDate
+        currentMatchday
       }
       standings {
         type
@@ -36,6 +37,41 @@ export const STANDINGS_QUERY = gql`
           won
           draw
           lost
+        }
+      }
+    }
+  }
+`;
+
+export const FIXTURES_QUERY = gql`
+  query FixturesQuery($id: Int) {
+    fixtures(id: $id) {
+      count
+      competition {
+        id
+        name
+      }
+      matches {
+        id
+        utcDate
+        status
+        matchday
+        stage
+        group
+        homeTeam {
+          id
+          name
+        }
+        awayTeam {
+          id
+          name
+        }
+        score {
+          winner
+          fullTime {
+            homeTeam
+            awayTeam
+          }
         }
       }
     }

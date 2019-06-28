@@ -126,9 +126,8 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
           {team.squad.length > 0 && <Players players={team.squad} />}
         </React.Fragment>
       );
-    } else {
-      return <Matches id={team.id} activeTeam={team.name} />;
     }
+    return <Matches id={team.id} activeTeam={team.name} />;
   };
 
   return (

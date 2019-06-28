@@ -3,6 +3,7 @@ import { RouteComponentProps } from 'react-router';
 import { Standings } from './Standings';
 import { Tabs } from '../../components/Tabs/Tabs';
 import { Tab } from '../../components/Tabs/Tab';
+import { Fixtures } from './Fixtures';
 
 interface ICompetitionProps extends RouteComponentProps<{ id: string }> {}
 
@@ -43,6 +44,9 @@ export const Competition: React.FC<ICompetitionProps> = props => {
   const renderContent = (): JSX.Element => {
     if (activeTab === CompetitionTabs.STANDINGS) {
       return <Standings id={parseInt(props.match.params.id)} />;
+    }
+    if (activeTab === CompetitionTabs.FIXTURES) {
+      return <Fixtures id={parseInt(props.match.params.id)} />;
     }
   };
 

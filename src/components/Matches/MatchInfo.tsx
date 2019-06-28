@@ -5,27 +5,26 @@ import { parseDate, parseTime, capitalize } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import { Text } from '../Text/Text';
 import { getResultClass } from './matchesHelpers';
+import { ICompetition } from '../../models/competitions';
 
 interface IMatchInfoProps {
   match: IMatch;
-  activeTeam: string;
+  activeTeam?: string;
+  competition?: ICompetition;
 }
 
-export const MatchInfo: React.FC<IMatchInfoProps> = ({ match, activeTeam }) => {
-  const {
-    competition,
-    utcDate,
-    matchday,
-    stage,
-    homeTeam,
-    awayTeam,
-    score
-  } = match;
+export const MatchInfo: React.FC<IMatchInfoProps> = ({
+  match,
+  activeTeam,
+  competition
+}) => {
+  const { utcDate, matchday, stage, homeTeam, awayTeam, score } = match;
+  const competitionToShow = competition ? competition : match.competition;
 
   const renderMatchHeader = (): JSX.Element => (
     <div className='match-info-header'>
-      <Link to={`/competition/${competition.id}`}>
-        <span>{competition.name}</span>
+      <Link to={`/competition/${competitionToShow.id}`}>
+        <span>{competitionToShow.name}</span>
       </Link>
       <Text>
         {parseDate(new Date(utcDate))} {parseTime(new Date(utcDate))}
@@ -60,7 +59,9 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({ match, activeTeam }) => {
 
   return (
     <div
-      className={`match-info-container ${getResultClass(match, activeTeam)}`}>
+      className={`match-info-container ${
+        activeTeam ? getResultClass(match, activeTeam) : ''
+      }`}>
       {renderMatchHeader()}
       {renderMatchResult()}
     </div>
