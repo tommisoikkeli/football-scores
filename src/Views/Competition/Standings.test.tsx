@@ -29,7 +29,8 @@ const mocks = [
           season: {
             id: 123,
             startDate: '2019-08-18',
-            endDate: '2020-05-17'
+            endDate: '2020-05-17',
+            currentMatchday: 3
           },
           standings: [
             {
@@ -79,11 +80,6 @@ const mocks = [
     }
   }
 ];
-
-const competition = {
-  id: 11,
-  name: 'Beep League'
-};
 
 describe('Standings', () => {
   let wrapper: any;
