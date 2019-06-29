@@ -16,9 +16,9 @@ interface IStandingsProps {
 }
 
 export const Standings: React.FC<IStandingsProps> = ({ id }) => {
-  const hasGroups = (standings: IStandings[]) => standings.length > 1;
+  const hasGroups = (standings: IStandings[]): boolean => standings.length > 1;
 
-  const isTableEmpty = (standings: IStandings[]) => standings.length === 0;
+  const isTableEmpty = (standings: IStandings[]): boolean => standings.length === 0;
 
   const getSeason = (startDate: Date, endDate: Date): string => {
     const startYear = startDate.getFullYear();
