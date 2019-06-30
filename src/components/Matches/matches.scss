@@ -5,8 +5,14 @@
   margin-bottom: 15px;
   border: 1px solid $border-grey;
   width: 500px;
+  height: 85px;
   position: relative;
   box-shadow: $box-shadow;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.08);
+  }
 
   &:after {
     content: '';
@@ -79,9 +85,11 @@
       display: flex;
       width: 60px;
       justify-content: space-between;
+      background: $score-background;
+      padding: 0 10px;
 
       .score {
-        font-size: 22px;
+        font-size: 26px;
       }
     }
   }

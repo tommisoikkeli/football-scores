@@ -8,8 +8,8 @@ export const Followed: React.FC = () => {
   const [active, setActive] = React.useState<string>('');
 
   const onItemClick = (name: string): void => {
-    const isActive = active === name;
-    if (isActive) {
+    const isActive = (): boolean => active === name;
+    if (isActive()) {
       setActive(''); // Close item on click if it is currently active.
     } else {
       setActive(name);
