@@ -15,7 +15,8 @@ interface IFixturesProps {
 
 export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
   const [matches, setMatches] = React.useState<IMatch[]>([]);
-  const [filter, setFilter] = React.useState<string>('');
+  const [filter, setFilter] = React.useState<string>('1');
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState<boolean>(false);
   const matchesToShow = filter
     ? matches.filter((m: IMatch) => m.matchday === parseInt(filter))
     : matches;
@@ -32,7 +33,11 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
   };
 
   const getDropdownOptions = (matches: IMatch[]): string[] =>
-    Array.from(new Set(matches.map(m => `${m.matchday}`)));
+    Array.from(
+      new Set(
+        matches.map(m => (m.matchday !== null ? `${m.matchday}` : `${m.stage}`))
+      )
+    );
 
   return (
     <Query<IFixturesQuery, IFixturesQueryVariables>
@@ -45,11 +50,13 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
         return (
           <div className='fixtures'>
             {!matches.length && setMatches(data.fixtures.matches)}
-            {!filter && setFilter('1')}
             <Dropdown
-              options={getDropdownOptions(data.fixtures.matches)}
               label='Matchday'
-              onChange={event => setFilter(event.target.value)}
+              options={getDropdownOptions(data.fixtures.matches)}
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              onItemSelect={option => setFilter(option)}
+              isOpen={isDropdownOpen}
+              value={filter}
             />
             {getFixtures(matchesToShow, data.fixtures.competition)}
           </div>

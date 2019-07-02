@@ -4,19 +4,28 @@ import './dropdown.scss';
 interface IDropdownProps {
   label: string;
   options: string[];
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onClick: () => void;
+  onItemSelect: (option: string) => void;
+  isOpen: boolean;
+  value: string;
 }
 
 export const Dropdown: React.FC<IDropdownProps> = ({
   label,
   options,
-  onChange
+  onClick,
+  onItemSelect,
+  isOpen,
+  value
 }) => {
   const getOptions = (): JSX.Element[] => {
     return options.map((o: string, i: number) => (
-      <option key={`options-${i}`} value={o}>
+      <li
+        className='dropdown-option'
+        key={`options-${i}`}
+        onClick={() => onItemSelect(o)}>
         {o}
-      </option>
+      </li>
     ));
   };
 
@@ -25,10 +34,15 @@ export const Dropdown: React.FC<IDropdownProps> = ({
       <div className='dropdown-label'>
         <label>{label}</label>
       </div>
-      <select className='dropdown' onChange={onChange}>
-        {getOptions()}
-      </select>
-      <i className='material-icons-outlined'>arrow_drop_down</i>
+      <div className={`dropdown ${isOpen ? 'open' : ''}`} onClick={onClick}>
+        <div className='selected'>{value}</div>
+        <ul className={`dropdown-options ${isOpen ? 'open' : ''}`}>
+          {getOptions()}
+        </ul>
+      </div>
+      <i className='material-icons-outlined'>
+        {isOpen ? 'arrow_drop_up' : 'arrow_drop_down'}
+      </i>
     </div>
   );
 };

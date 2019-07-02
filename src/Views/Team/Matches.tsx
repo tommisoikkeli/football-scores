@@ -29,7 +29,8 @@ const filterOptions: string[] = [
 
 export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
   const [matches, setMatches] = React.useState<IMatch[]>([]);
-  const [filter, setFilter] = React.useState<string>('All');
+  const [filter, setFilter] = React.useState<string>('');
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState<boolean>(false);
   const matchesToShow =
     filter !== 'All' ? filterMatches(matches, filter, activeTeam) : matches;
 
@@ -48,9 +49,12 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
           <React.Fragment>
             <div className='matches-header-section'>
               <Dropdown
-                onChange={event => setFilter(event.target.value)}
                 label='Filter'
                 options={filterOptions}
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                onItemSelect={option => setFilter(option)}
+                isOpen={isDropdownOpen}
+                value={filter}
               />
               <Text>{getMatchCount()}</Text>
             </div>

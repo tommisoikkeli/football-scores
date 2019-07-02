@@ -14,24 +14,51 @@
   }
 
   .dropdown {
+    display: flex;
     width: 150px;
-    height: 35px;
-    appearance: none;
+    height: 20px;
     padding: 10px;
-    border-radius: 2px;
     cursor: pointer;
     background: $white;
     border: 1px solid $border-grey;
+    position: relative;
 
-    &:hover {
+    &.open {
       background: darken($white, 2%);
+    }
+
+    .dropdown-options {
+      display: none;
+      position: absolute;
+      top: 25px;
+      left: -1px;
+      border: 1px solid $border-grey;
+      width: 100%;
+      padding: 0;
+      max-height: 150px;
+      overflow: scroll;
+      background: $white;
+      z-index: 1;
+
+      &.open {
+        display: block;
+      }
+
+      .dropdown-option {
+        list-style-type: none;
+        padding: 2px;
+
+        &:hover {
+          background: darken($white, 2%);
+        }
+      }
     }
   }
 
   i {
     position: absolute;
     right: 5px;
-    top: 8px;
+    top: 12px;
     font-size: 18px;
     pointer-events: none;
   }
