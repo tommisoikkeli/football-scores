@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StandingsTable } from './StandingsTable';
 import { IStandings } from '../../models/standings';
+import { removeUnderScores } from '../../utils/utils';
 
 interface IGroupsTableProps {
   groups: IStandings[];
@@ -12,7 +13,7 @@ export const GroupsTable: React.FC<IGroupsTableProps> = ({ groups }) => {
       <React.Fragment key={`standing-${i}`}>
         <StandingsTable
           standings={group.table}
-          groupIdentifier={group.group.replace(/_/g, ' ')}
+          groupIdentifier={removeUnderScores(group.group)}
         />
       </React.Fragment>
     ));

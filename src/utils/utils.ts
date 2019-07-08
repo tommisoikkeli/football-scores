@@ -4,6 +4,14 @@ export function splitString(string: string, separator: string): string[] {
   return string.split(separator);
 }
 
+export function removeUnderScores(string: string): string {
+  return string.replace(/_/g, ' ');
+}
+
+export function addUnderScores(string: string): string {
+  return string.replace(/ /g, '_');
+}
+
 export function parseDate(date: Date): string {
   const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
   const month = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;

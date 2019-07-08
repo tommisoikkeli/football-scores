@@ -8,6 +8,11 @@ import { MatchInfo } from '../../components/Matches/MatchInfo';
 import './fixtures.scss';
 import { ICompetition } from '../../models/competitions';
 import { Dropdown } from '../../components/Dropdown/Dropdown';
+import {
+  removeUnderScores,
+  capitalize,
+  addUnderScores
+} from '../../utils/utils';
 
 interface IFixturesProps {
   id: number;
@@ -15,11 +20,19 @@ interface IFixturesProps {
 
 export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
   const [matches, setMatches] = React.useState<IMatch[]>([]);
-  const [filter, setFilter] = React.useState<string>('1');
+  const [filter, setFilter] = React.useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = React.useState<boolean>(false);
-  const matchesToShow = filter
-    ? matches.filter((m: IMatch) => m.matchday === parseInt(filter))
-    : matches;
+
+  const getMatchesToShow = (): IMatch[] => {
+    if (filter) {
+      return matches.filter((m: IMatch) =>
+        m.matchday !== null
+          ? m.matchday === +filter
+          : m.stage === addUnderScores(filter.toUpperCase())
+      );
+    }
+    return matches;
+  };
 
   const getFixtures = (
     matches: IMatch[],
@@ -33,9 +46,14 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
   };
 
   const getDropdownOptions = (matches: IMatch[]): string[] =>
+    // Get unique matchdays.
     Array.from(
       new Set(
-        matches.map(m => (m.matchday !== null ? `${m.matchday}` : `${m.stage}`))
+        matches.map(m =>
+          m.matchday !== null
+            ? `${m.matchday}`
+            : `${capitalize(removeUnderScores(m.stage))}`
+        )
       )
     );
 
@@ -50,6 +68,7 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
         return (
           <div className='fixtures'>
             {!matches.length && setMatches(data.fixtures.matches)}
+            {!filter && setFilter(getDropdownOptions(data.fixtures.matches)[0])}
             <Dropdown
               label='Matchday'
               options={getDropdownOptions(data.fixtures.matches)}
@@ -58,7 +77,7 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
               isOpen={isDropdownOpen}
               value={filter}
             />
-            {getFixtures(matchesToShow, data.fixtures.competition)}
+            {getFixtures(getMatchesToShow(), data.fixtures.competition)}
           </div>
         );
       }}

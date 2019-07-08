@@ -29,7 +29,7 @@ const filterOptions: string[] = [
 
 export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
   const [matches, setMatches] = React.useState<IMatch[]>([]);
-  const [filter, setFilter] = React.useState<string>('');
+  const [filter, setFilter] = React.useState<string>('All');
   const [isDropdownOpen, setIsDropdownOpen] = React.useState<boolean>(false);
   const matchesToShow =
     filter !== 'All' ? filterMatches(matches, filter, activeTeam) : matches;

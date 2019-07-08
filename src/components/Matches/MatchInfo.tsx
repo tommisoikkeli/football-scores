@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IMatch } from '../../models/matches';
 import './matches.scss';
-import { parseDate, parseTime, capitalize } from '../../utils/utils';
+import { parseDate, parseTime, capitalize, removeUnderScores } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import { Text } from '../Text/Text';
 import { getResultClass } from './matchesHelpers';
@@ -33,7 +33,7 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({
         {matchday ? (
           <Text>Matchday {matchday}</Text>
         ) : (
-          <Text>{capitalize(stage.replace(/_/g, ' '))}</Text>
+          <Text>{capitalize(removeUnderScores(stage))}</Text>
         )}
       </div>
     </div>
