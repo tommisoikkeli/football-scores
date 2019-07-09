@@ -14,12 +14,6 @@ interface IScorersProps {
 }
 
 export const Scorers: React.FC<IScorersProps> = ({ id }) => {
-  const getScorersTable = (scorers: IScorer[]): JSX.Element => (
-    <React.Fragment>
-      <ScorersTable scorers={scorers} />
-    </React.Fragment>
-  );
-
   return (
     <Query<IScorersQuery, IScorersQueryVariables>
       query={SCORERS_QUERY}
@@ -29,7 +23,9 @@ export const Scorers: React.FC<IScorersProps> = ({ id }) => {
         if (error) return <div>Error</div>;
 
         return (
-          <div className='scorers'>{getScorersTable(data.scorers.scorers)}</div>
+          <div className='scorers'>
+            <ScorersTable scorers={data.scorers.scorers} />
+          </div>
         );
       }}
     </Query>
