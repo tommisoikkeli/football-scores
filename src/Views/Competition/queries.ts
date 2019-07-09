@@ -77,3 +77,32 @@ export const FIXTURES_QUERY = gql`
     }
   }
 `;
+
+export const SCORERS_QUERY = gql`
+  query ScorersQuery($id: Int) {
+    scorers(id: $id) {
+      competition {
+        id
+        name
+      }
+      season {
+        id
+        startDate
+        endDate
+      }
+      scorers {
+        player {
+          id
+          name
+          nationality
+          position
+        }
+        team {
+          id
+          name
+        }
+        numberOfGoals
+      }
+    }
+  }
+`;

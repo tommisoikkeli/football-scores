@@ -66,6 +66,10 @@
         &:hover {
           background: darken(#fff, 2%);
         }
+
+        a:hover {
+          text-decoration: underline;
+        }
       }
     }
   }

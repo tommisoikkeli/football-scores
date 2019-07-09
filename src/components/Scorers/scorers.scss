@@ -1,0 +1,43 @@
+@import '../../styles/variables.scss';
+
+.scorers-table-wrapper {
+  display: flex;
+  justify-content: center;
+
+  .scorers-table {
+    padding: 10px;
+    border: 1px solid $border-grey;
+    border-radius: 3px;
+    border-spacing: 0;
+    font-size: 14px;
+    width: 600px;
+
+    tr {
+      border: 1px solid $border-grey;
+    }
+
+    th {
+      padding: 5px;
+    }
+
+    tbody {
+      tr {
+        td {
+          padding: 7px;
+
+          &:last-child {
+            font-weight: bold;
+          }
+
+          a:hover {
+            text-decoration: underline;
+          }
+
+          
+            border-bottom: 1px solid $border-grey;
+          
+        }
+      }
+    }
+  }
+}
