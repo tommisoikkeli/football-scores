@@ -38,41 +38,44 @@
   .match-status {
     padding: 7px;
     font-size: 14px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
 
     &.finished {
       color: $finished-green;
-      border: 1px solid $finished-green;
+      border-color: $finished-green;
     }
 
     &.scheduled {
       color: $scheduled-blue;
-      border: 1px solid $scheduled-blue;
+      border-color: $scheduled-blue;
     }
 
     &.postponed {
       color: $postponed-orange;
-      border: 1px solid $postponed-orange;
+      border-color: $postponed-orange;
     }
 
     &.live {
       color: $live-red;
-      border: 1px solid $live-red;
+      border-color: $live-red;
     }
 
     &.paused {
       color: $paused-blue;
-      border: 1px solid $paused-blue;
+      border-color: $paused-blue;
     }
 
     &.in_play {
       color: $inplay-orange;
-      border: 1px solid $inplay-orange;
+      border-color: $inplay-orange;
       animation: blink 3s infinite;
     }
 
     &.canceled {
       color: $canceled-red;
-      border: 1px solid $canceled-red;
+      border-color: $canceled-red;
     }
   }
 
