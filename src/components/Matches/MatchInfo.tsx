@@ -9,13 +9,21 @@ import {
 } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import { Text } from '../Text/Text';
-import { getResultClass } from './matchesHelpers';
+import { getResultClass, getMatchStatusClass } from './matchesHelpers';
 import { ICompetition } from '../../models/competitions';
 
 interface IMatchInfoProps {
   match: IMatch;
   activeTeam?: string;
   competition?: ICompetition;
+}
+
+enum MatchStatus {
+  FINISHED = 'FINISHED',
+  SCHEDULED = 'SCHEDULED',
+  POSTPONED = 'POSTPONED',
+  LIVE = 'LIVE',
+  CANCELED = 'CANCELED'
 }
 
 export const MatchInfo: React.FC<IMatchInfoProps> = ({
@@ -75,12 +83,12 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({
       className={`match-info-container ${
         activeTeam ? getResultClass(match, activeTeam) : ''
       }`}>
-      <div
-        className={`match-status ${
-          match.status === 'FINISHED' ? 'finished' : 'scheduled'
-        }`}>
-        <span>{capitalize(match.status)}</span>
-      </div>
+      <span
+        className={`match-status ${getMatchStatusClass(
+          MatchStatus[match.status as keyof typeof MatchStatus]
+        )}`}>
+        {match.status}
+      </span>
       {renderMatchHeader()}
       {renderMatchResult()}
     </div>

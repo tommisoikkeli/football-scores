@@ -36,12 +36,32 @@
   }
 
   .match-status {
+    padding: 5px;
+    font-size: 14px;
+
     &.finished {
       color: $finished-green;
+      border: 1px solid $finished-green;
     }
 
     &.scheduled {
       color: $scheduled-blue;
+      border: 1px solid $scheduled-blue;
+    }
+
+    &.postponed {
+      color: $postponed-orange;
+      border: 1px solid $postponed-orange;
+    }
+
+    &.live {
+      color: $live-red;
+      border: 1px solid $live-red;
+    }
+
+    &.canceled {
+      color: $canceled-red;
+      border: 1px solid $canceled-red;
     }
   }
 

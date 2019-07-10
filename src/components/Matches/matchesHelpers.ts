@@ -91,3 +91,7 @@ export const getResultClass = (match: IMatch, activeTeam: string): string => {
     return 'scheduled';
   }
 };
+
+export const getMatchStatusClass = (status: string): string => {
+  return status.toLowerCase();
+}
