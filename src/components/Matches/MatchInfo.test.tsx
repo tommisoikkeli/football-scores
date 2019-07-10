@@ -45,6 +45,7 @@ describe('MatchInfo', () => {
       </Router>
     );
     expect(wrapper.find('.match-info-container').hasClass('win')).toBeTruthy();
+    expect(wrapper.find('.match-status').text()).toEqual('FINISHED');
     expect(wrapper.find('.match-info-header').text()).toContain('Test League');
     expect(wrapper.find('.match-info-header').text()).toContain('Matchday 1');
     expect(wrapper.find('.score-block').text()).toEqual('3-1');
