@@ -37,13 +37,9 @@ export function capitalize(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
-export function shouldAddGoat(player: string): boolean {
-  return player === 'Lionel Messi';
-}
-
 // add goat emoji next to Messi because Messi is the GOAT
 export function checkPlayerAndAddGoatIfNeeded(player: string): string {
-  if (shouldAddGoat(player)) {
+  if (player === 'Lionel Messi') {
     return (player += ' 🐐');
   }
   return player;

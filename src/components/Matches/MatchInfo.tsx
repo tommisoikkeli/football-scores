@@ -75,6 +75,12 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({
       className={`match-info-container ${
         activeTeam ? getResultClass(match, activeTeam) : ''
       }`}>
+      <div
+        className={`match-status ${
+          match.status === 'FINISHED' ? 'finished' : 'scheduled'
+        }`}>
+        <span>{capitalize(match.status)}</span>
+      </div>
       {renderMatchHeader()}
       {renderMatchResult()}
     </div>
