@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { IMatch } from '../../models/matches';
 import './matches.scss';
-import { parseDate, parseTime, capitalize, removeUnderScores } from '../../utils/utils';
+import {
+  parseDate,
+  parseTime,
+  capitalize,
+  removeUnderScores
+} from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import { Text } from '../Text/Text';
 import { getResultClass } from './matchesHelpers';
@@ -41,19 +46,27 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({
 
   const renderMatchResult = (): JSX.Element => (
     <div className='match-result'>
-      <span
-        className={`team-name ${score.winner === 'HOME_TEAM' ? 'winner' : ''}`}>
-        {homeTeam.name}
-      </span>
+      <Link to={`/team/${homeTeam.id}`}>
+        <span
+          className={`team-name ${
+            score.winner === 'HOME_TEAM' ? 'winner' : ''
+          }`}>
+          {homeTeam.name}
+        </span>
+      </Link>
       <div className='score-block'>
         <span className='score'>{score.fullTime.homeTeam}</span>
         <span className='score'>-</span>
         <span className='score'>{score.fullTime.awayTeam}</span>
       </div>
-      <span
-        className={`team-name ${score.winner === 'AWAY_TEAM' ? 'winner' : ''}`}>
-        {awayTeam.name}
-      </span>
+      <Link to={`/team/${awayTeam.id}`}>
+        <span
+          className={`team-name ${
+            score.winner === 'AWAY_TEAM' ? 'winner' : ''
+          }`}>
+          {awayTeam.name}
+        </span>
+      </Link>
     </div>
   );
 

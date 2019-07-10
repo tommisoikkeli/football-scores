@@ -36,6 +36,9 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
   }, [isFollowed, team, isTeamFollowed]);
 
   const getTeamColors = (): JSX.Element[] => {
+    if (!team.clubColors) {
+      return;
+    }
     // Make an array from the team colors.
     const colors: string[] = splitString(team.clubColors, '/');
 

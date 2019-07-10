@@ -1,4 +1,4 @@
-import { ITeam } from "../models/team";
+import { ITeam } from '../models/team';
 
 export function splitString(string: string, separator: string): string[] {
   return string.split(separator);
@@ -12,16 +12,24 @@ export function addUnderScores(string: string): string {
   return string.replace(/ /g, '_');
 }
 
+export function truncate(string: string, maxLength: number): string {
+  return string.length > maxLength
+    ? string.substring(0, maxLength) + '...'
+    : string;
+}
+
 export function parseDate(date: Date): string {
   const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-  const month = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+  const month =
+    date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
   const year = date.getFullYear();
   return `${day}.${month}.${year}`;
 }
 
 export function parseTime(date: Date): string {
   const hours = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
-  const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+  const minutes =
+    date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
   return `${hours}:${minutes}`;
 }
 
@@ -36,7 +44,7 @@ export function shouldAddGoat(player: string): boolean {
 // add goat emoji next to Messi because Messi is the GOAT
 export function checkPlayerAndAddGoatIfNeeded(player: string): string {
   if (shouldAddGoat(player)) {
-    return player += ' 🐐';
+    return (player += ' 🐐');
   }
   return player;
 }
@@ -51,11 +59,17 @@ export function setLocalStorageItem(key: string, item: ITeam): void {
 }
 
 export function removeLocalStorageItem(key: string, item: ITeam): void {
-  const items = getLocalStorageItems(key).filter((t: ITeam) => t.id !== item.id);
+  const items = getLocalStorageItems(key).filter(
+    (t: ITeam) => t.id !== item.id
+  );
   window.localStorage.setItem(key, JSON.stringify(items));
 }
 
 export function isTeamSaved(key: string, id: number): boolean {
   // check if id exists in local storage
-  return getLocalStorageItems(key).map((t: ITeam) => t.id).indexOf(id) !== -1;
+  return (
+    getLocalStorageItems(key)
+      .map((t: ITeam) => t.id)
+      .indexOf(id) !== -1
+  );
 }

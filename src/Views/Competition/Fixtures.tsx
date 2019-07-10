@@ -11,7 +11,8 @@ import { Dropdown } from '../../components/Dropdown/Dropdown';
 import {
   removeUnderScores,
   capitalize,
-  addUnderScores
+  addUnderScores,
+  truncate
 } from '../../utils/utils';
 
 interface IFixturesProps {
@@ -75,7 +76,7 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               onItemSelect={option => setFilter(option)}
               isOpen={isDropdownOpen}
-              value={filter}
+              value={truncate(filter, 16)}
             />
             {getFixtures(getMatchesToShow(), data.fixtures.competition)}
           </div>

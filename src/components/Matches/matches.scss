@@ -68,12 +68,19 @@
     align-items: center;
     padding-top: 10px;
 
-    .team-name {
+    a {
       flex: 1;
+    }
+
+    .team-name {
       font-weight: normal;
 
       &.winner {
         font-weight: bold;
+      }
+
+      &:hover {
+        text-decoration: underline;
       }
     }
 
