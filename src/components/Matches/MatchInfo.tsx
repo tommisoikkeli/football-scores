@@ -23,7 +23,9 @@ enum MatchStatus {
   SCHEDULED = 'SCHEDULED',
   POSTPONED = 'POSTPONED',
   LIVE = 'LIVE',
-  CANCELED = 'CANCELED'
+  CANCELED = 'CANCELED',
+  PAUSED = 'PAUSED',
+  IN_PLAY = 'IN_PLAY'
 }
 
 export const MatchInfo: React.FC<IMatchInfoProps> = ({
@@ -87,7 +89,7 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({
         className={`match-status ${getMatchStatusClass(
           MatchStatus[match.status as keyof typeof MatchStatus]
         )}`}>
-        {match.status}
+        {removeUnderScores(match.status)}
       </span>
       {renderMatchHeader()}
       {renderMatchResult()}
