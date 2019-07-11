@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getLocalStorageItems } from '../../utils/utils';
+import { getLocalStorageItems } from '../../utils/localStorageUtils';
 import { ITeam } from '../../models/team';
 import { FollowedTeam } from '../../components/Team/FollowedTeam';
 

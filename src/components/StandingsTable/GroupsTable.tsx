@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StandingsTable } from './StandingsTable';
 import { IStandings } from '../../models/standings';
-import { removeUnderScores } from '../../utils/utils';
+import { removeUnderScores } from '../../utils/stringUtils';
 
 interface IGroupsTableProps {
   groups: IStandings[];

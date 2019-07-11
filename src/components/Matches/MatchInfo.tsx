@@ -1,16 +1,12 @@
 import * as React from 'react';
 import { IMatch } from '../../models/matches';
 import './matches.scss';
-import {
-  parseDate,
-  parseTime,
-  capitalize,
-  removeUnderScores
-} from '../../utils/utils';
+import { capitalize, removeUnderScores } from '../../utils/stringUtils';
 import { Link } from 'react-router-dom';
 import { Text } from '../Text/Text';
 import { getResultClass, getMatchStatusClass } from './matchesHelpers';
 import { ICompetition } from '../../models/competitions';
+import { parseDate, parseTime } from '../../utils/dateUtils';
 
 interface IMatchInfoProps {
   match: IMatch;

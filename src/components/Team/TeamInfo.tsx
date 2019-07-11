@@ -5,13 +5,13 @@ import './team.scss';
 import { Text } from '../Text/Text';
 import { Players } from './Players';
 import {
-  splitString,
   setLocalStorageItem,
   removeLocalStorageItem,
   isTeamSaved
-} from '../../utils/utils';
+} from '../../utils/localStorageUtils';
 import { ColorBall } from './ColorBall';
 import { Button, ButtonType } from '../Button/Button';
+import { splitString } from '../../utils/stringUtils';
 
 interface ITeamInfoProps {
   team: ITeam;

@@ -13,7 +13,7 @@ import {
   capitalize,
   addUnderScores,
   truncate
-} from '../../utils/utils';
+} from '../../utils/stringUtils';
 
 interface IFixturesProps {
   id: number;
