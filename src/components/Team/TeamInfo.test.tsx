@@ -5,6 +5,10 @@ import { ITeam } from '../../models/team';
 
 const testTeam1: ITeam = {
   id: 1,
+  area: {
+    id: 12,
+    name: 'Finland'
+  },
   name: 'FC Test',
   crestUrl: 'cresturl',
   tla: 'FCT',
@@ -52,6 +56,10 @@ const testTeam1: ITeam = {
 
 const testTeam2: ITeam = {
   id: 2,
+  area: {
+    id: 12,
+    name: 'Finland'
+  },
   name: 'FC Test',
   crestUrl: 'cresturl',
   tla: 'FCT',
@@ -76,12 +84,12 @@ describe('TeamInfo with squad', () => {
         .text()
     ).toBe('FC Test (FCT)');
     expect(wrapper.find('TeamCrest').html()).toContain(testTeam1.crestUrl);
-    expect(wrapper.find('.info-row').length).toBe(4);
+    expect(wrapper.find('.info-row').length).toBe(5);
     expect(wrapper.find('ColorBall').length).toBe(2);
     expect(
       wrapper
         .find('.info-row')
-        .at(3)
+        .at(4)
         .text()
     ).toContain('Test Coach');
   });
@@ -109,7 +117,7 @@ describe('TeamInfo without squad', () => {
   });
 
   it('does not render coach', () => {
-    expect(wrapper.find('.info-row').length).toBe(3);
+    expect(wrapper.find('.info-row').length).toBe(4);
   });
 
   it('does not render players', () => {

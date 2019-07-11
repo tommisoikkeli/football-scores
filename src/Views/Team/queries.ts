@@ -4,6 +4,10 @@ export const TEAM_QUERY = gql`
   query TeamQuery($id: Int) {
     team(id: $id) {
       id
+      area {
+        id
+        name
+      }
       crestUrl
       founded
       name

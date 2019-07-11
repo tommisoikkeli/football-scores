@@ -1,6 +1,9 @@
+import { IArea } from "./competitions";
+
 export interface ITeam {
   id: number;
   name: string;
+  area?: IArea;
   crestUrl?: string;
   tla?: string;
   founded?: number;

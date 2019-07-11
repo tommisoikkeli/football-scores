@@ -74,6 +74,10 @@ export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
   const renderInfoRows = (): JSX.Element => (
     <React.Fragment>
       <div className='info-row'>
+        <span className='info-text'>Country: </span>
+        <span>{team.area.name}</span>
+      </div>
+      <div className='info-row'>
         <span className='info-text'>Founded: </span>
         <span>{team.founded}</span>
       </div>

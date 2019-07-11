@@ -5,8 +5,8 @@ export interface ICompetition {
   area?: IArea;
 }
 
-interface IArea {
-  id: string;
+export interface IArea {
+  id: number;
   name: string;
 }
 
