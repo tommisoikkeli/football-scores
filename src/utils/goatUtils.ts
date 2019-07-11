@@ -6,7 +6,7 @@ function shouldAddGoat(player: string): boolean {
 
 export function checkPlayerAndAddGoatIfNeeded(player: string): string {
   if (shouldAddGoat(player)) {
-    return (player += ' 🐐');
+    return player + ' 🐐';
   }
   return player;
 }
