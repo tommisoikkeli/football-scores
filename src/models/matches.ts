@@ -10,7 +10,7 @@ export interface IMatch {
   matchday: number;
   stage: string;
   group: string;
-  homeTeam: IMatchTeam
+  homeTeam: IMatchTeam;
   awayTeam: IMatchTeam;
   score: IScore;
 }
@@ -34,6 +34,14 @@ interface IMatches {
   matches: IMatch[];
 }
 
+interface ILatestMatch {
+  latestMatch: IMatch[]
+}
+
+interface INextMatch {
+  nextMatch: IMatch[];
+}
+
 export interface IMatchesQuery {
   matches: IMatches;
 }
@@ -42,7 +50,28 @@ export interface IMatchesQueryVariables {
   id: number;
 }
 
+export interface ILatestMatchQuery {
+  latestMatch: IMatches;
+}
+
+export interface ILatestMatchQueryVariables {
+  id: number;
+}
+
+export interface INextMatchQuery {
+  nextMatch: IMatches;
+}
+
+export interface INextMatchQueryVariables {
+  id: number;
+}
+
 export enum MatchStatus {
   FINISHED = 'FINISHED',
-  SCHEDULED = 'SCHEDULED'
+  SCHEDULED = 'SCHEDULED',
+  POSTPONED = 'POSTPONED',
+  LIVE = 'LIVE',
+  CANCELED = 'CANCELED',
+  PAUSED = 'PAUSED',
+  IN_PLAY = 'IN_PLAY'
 }

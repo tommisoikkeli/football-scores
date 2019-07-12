@@ -6,12 +6,14 @@ interface IFollowedTeamProps {
   team: ITeam;
   isActive: boolean;
   onClick: () => void;
+  children: React.ReactNode;
 }
 
 export const FollowedTeam: React.FC<IFollowedTeamProps> = ({
   team,
   isActive,
-  onClick
+  onClick,
+  children
 }) => (
   <div
     className={`followed-team ${isActive ? 'active' : ''}`}
@@ -21,8 +23,6 @@ export const FollowedTeam: React.FC<IFollowedTeamProps> = ({
       {team.name}
       <i className='material-icons-outlined'>keyboard_arrow_down</i>
     </div>
-    <div className='followed-team-content'>
-      <p>content</p>
-    </div>
+    <div className='followed-team-content'>{children}</div>
   </div>
 );

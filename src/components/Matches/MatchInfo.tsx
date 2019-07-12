@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IMatch } from '../../models/matches';
+import { IMatch, MatchStatus } from '../../models/matches';
 import './matches.scss';
 import { capitalize, removeUnderScores } from '../../utils/stringUtils';
 import { Link } from 'react-router-dom';
@@ -14,21 +14,19 @@ interface IMatchInfoProps {
   competition?: ICompetition;
 }
 
-enum MatchStatus {
-  FINISHED = 'FINISHED',
-  SCHEDULED = 'SCHEDULED',
-  POSTPONED = 'POSTPONED',
-  LIVE = 'LIVE',
-  CANCELED = 'CANCELED',
-  PAUSED = 'PAUSED',
-  IN_PLAY = 'IN_PLAY'
-}
-
 export const MatchInfo: React.FC<IMatchInfoProps> = ({
   match,
   activeTeam,
   competition
 }) => {
+  if (!match) {
+    return (
+      <div className='no-matches-container'>
+        <Text>No matches found</Text>
+      </div>
+    );
+  }
+
   const { utcDate, matchday, stage, homeTeam, awayTeam, score } = match;
   const competitionToShow = competition ? competition : match.competition;
 

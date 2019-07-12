@@ -66,11 +66,12 @@
   margin: 15px;
 
   .followed-team {
-    width: 360px;
+    width: 420px;
     border: 1px solid $border-grey;
     border-radius: 3px;
     padding: 15px;
     cursor: pointer;
+    box-shadow: $box-shadow;
 
     &:hover {
       background: darken($white, 2%);
@@ -97,6 +98,41 @@
       margin-top: 10px;
       margin-bottom: -10px;
       border-top: 1px solid $border-grey;
+
+      .followed-team-link {
+        font-size: 14px;
+        color: $link-blue;
+        float: right;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .latest-match, .next-match {
+        > span {
+          display: inline-block;
+          font-weight: bold;
+          margin: 10px;
+          text-decoration: underline;
+        }
+      }
+
+      .match-info-container {
+        width: unset;
+        height: unset;
+
+        .match-status {
+          font-size: 12px;
+          padding: 5px;
+        }
+
+        .match-info-header {
+          a {
+            font-size: 12px;
+          }
+        }
+      }
     }
 
     &.active {
