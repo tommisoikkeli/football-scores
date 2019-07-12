@@ -35,7 +35,7 @@ interface IMatches {
 }
 
 interface ILatestMatch {
-  latestMatch: IMatch[]
+  latestMatch: IMatch[];
 }
 
 interface INextMatch {
