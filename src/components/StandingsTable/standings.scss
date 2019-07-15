@@ -1,4 +1,5 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .standings-table-wrapper {
   display: flex;
@@ -56,6 +57,12 @@
             height: 24px;
             width: 24px;
             margin-right: 12px;
+
+            @include mobile-large {
+              height: 15px;
+              width: 15px;
+              margin-right: 10px;
+            }
           }
 
           .fallback-crest {

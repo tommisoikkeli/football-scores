@@ -1,9 +1,14 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .text-wrapper {
   p {
     font-size: 16px;
     color: $text-grey;
     letter-spacing: 0.4px;
+
+    @include mobile {
+      font-size: 14px;
+    }
   }
 }

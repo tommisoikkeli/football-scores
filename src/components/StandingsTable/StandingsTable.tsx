@@ -3,16 +3,24 @@ import './standings.scss';
 import { TeamCrest } from '../Team/TeamCrest';
 import { ITeamStanding } from '../../models/standings';
 import { Link } from 'react-router-dom';
+import { useWindowWidth } from '../../utils/hooks';
 
 interface IStandingsTableProps {
   standings: ITeamStanding[];
   groupIdentifier?: string;
 }
 
+const MAX_WIDTH: number = 480;
+
+// Hides some content on mobile.
+const isWindowOnMaxWidth = (width: number): boolean => width <= MAX_WIDTH;
+
 export const StandingsTable: React.FC<IStandingsTableProps> = ({
   standings,
   groupIdentifier
 }) => {
+  const width = useWindowWidth();
+
   const getTableHeaders = (): JSX.Element => {
     return (
       <thead>
@@ -28,9 +36,13 @@ export const StandingsTable: React.FC<IStandingsTableProps> = ({
           <th title='Win'>W</th>
           <th title='Draw'>D</th>
           <th title='Lost'>L</th>
-          <th title='Goals for'>GF</th>
-          <th title='Goals against'>GA</th>
-          <th title='Goal difference'>GD</th>
+          {!isWindowOnMaxWidth(width) && (
+            <React.Fragment>
+              <th title='Goals for'>GF</th>
+              <th title='Goals against'>GA</th>
+              <th title='Goal difference'>GD</th>
+            </React.Fragment>
+          )}
           <th title='Points'>P</th>
         </tr>
       </thead>
@@ -51,9 +63,13 @@ export const StandingsTable: React.FC<IStandingsTableProps> = ({
         <td>{s.won}</td>
         <td>{s.draw}</td>
         <td>{s.lost}</td>
-        <td>{s.goalsFor}</td>
-        <td>{s.goalsAgainst}</td>
-        <td>{s.goalDifference}</td>
+        {!isWindowOnMaxWidth(width) && (
+          <React.Fragment>
+            <td>{s.goalsFor}</td>
+            <td>{s.goalsAgainst}</td>
+            <td>{s.goalDifference}</td>
+          </React.Fragment>
+        )}
         <td>{s.points}</td>
       </tr>
     ));
