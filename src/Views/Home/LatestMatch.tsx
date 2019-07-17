@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Query } from 'react-apollo';
 import {
   ILatestMatchQuery,
-  ILatestMatchQueryVariables
+  ILatestMatchQueryVariables,
+  IMatch
 } from '../../models/matches';
 import { LATEST_MATCH_QUERY } from './queries';
 import { Loading } from '../../components/Loading/Loading';
@@ -13,6 +14,8 @@ interface ILatestMatchProps {
 }
 
 export const LatestMatch: React.FC<ILatestMatchProps> = ({ id }) => {
+  const getLatestMatch = (matches: IMatch[]) => matches[matches.length - 1];
+
   return (
     <Query<ILatestMatchQuery, ILatestMatchQueryVariables>
       query={LATEST_MATCH_QUERY}
@@ -24,7 +27,7 @@ export const LatestMatch: React.FC<ILatestMatchProps> = ({ id }) => {
         return (
           <div className='latest-match'>
             <span>Latest match</span>
-            <MatchInfo match={data.latestMatch.matches[0]} />
+            <MatchInfo match={getLatestMatch(data.latestMatch.matches)} />
           </div>
         );
       }}
