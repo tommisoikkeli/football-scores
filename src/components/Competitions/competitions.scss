@@ -72,13 +72,9 @@
     }
 
     @include mobile-large {
-      width: 300px;
+      width: 265px;
       padding: 10px;
       height: 160px;
-    }
-
-    @include mobile-small {
-      width: 280px;
     }
   }
 

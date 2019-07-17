@@ -1,3 +1,5 @@
+@import '../../styles/mixins.scss';
+
 .matches-container {
   display: flex;
   flex-direction: column;
@@ -9,5 +11,9 @@
     justify-content: space-between;
     width: 480px;
     align-items: baseline;
+
+    @include mobile {
+      width: 300px;
+    }
   }
 }
