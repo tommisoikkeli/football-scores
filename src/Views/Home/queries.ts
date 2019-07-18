@@ -40,6 +40,7 @@ export const LATEST_MATCH_QUERY = gql`
           name
         }
         score {
+          winner
           fullTime {
             homeTeam
             awayTeam
@@ -73,6 +74,7 @@ export const NEXT_MATCH_QUERY = gql`
           name
         }
         score {
+          winner
           fullTime {
             homeTeam
             awayTeam

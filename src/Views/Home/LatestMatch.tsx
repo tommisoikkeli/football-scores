@@ -11,9 +11,13 @@ import { MatchInfo } from '../../components/Matches/MatchInfo';
 
 interface ILatestMatchProps {
   id: number;
+  activeTeam: string;
 }
 
-export const LatestMatch: React.FC<ILatestMatchProps> = ({ id }) => {
+export const LatestMatch: React.FC<ILatestMatchProps> = ({
+  id,
+  activeTeam
+}) => {
   const getLatestMatch = (matches: IMatch[]) => matches[matches.length - 1];
 
   return (
@@ -27,7 +31,10 @@ export const LatestMatch: React.FC<ILatestMatchProps> = ({ id }) => {
         return (
           <div className='latest-match'>
             <span>Latest match</span>
-            <MatchInfo match={getLatestMatch(data.latestMatch.matches)} />
+            <MatchInfo
+              match={getLatestMatch(data.latestMatch.matches)}
+              activeTeam={activeTeam}
+            />
           </div>
         );
       }}

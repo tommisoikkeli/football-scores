@@ -25,8 +25,8 @@ export const Followed: React.FC = () => {
           team={t}
           isActive={active === t.name}
           onClick={() => onItemClick(t.name)}>
-          <LatestMatch id={t.id} />
-          <NextMatch id={t.id} />
+          <LatestMatch id={t.id} activeTeam={t.name} />
+          <NextMatch id={t.id} activeTeam={t.name} />
           <Link className='followed-team-link' to={`/team/${t.id}`}>
             Go to team page ⟶
           </Link>

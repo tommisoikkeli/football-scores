@@ -1,0 +1,39 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.footer {
+  background: $background-grey;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid $border-grey;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  p {
+    font-size: 14px;
+
+    a {
+      color: $link-blue;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    @include mobile {
+      font-size: 12px;
+    }
+
+    @include mobile-small {
+      font-size: 11px;
+    }
+  }
+
+  @include mobile {
+    height: 50px;
+  }
+}

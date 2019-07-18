@@ -1,15 +1,19 @@
 import * as React from 'react';
 import { Query } from 'react-apollo';
-import { INextMatchQuery, INextMatchQueryVariables } from '../../models/matches';
+import {
+  INextMatchQuery,
+  INextMatchQueryVariables
+} from '../../models/matches';
 import { NEXT_MATCH_QUERY } from './queries';
 import { Loading } from '../../components/Loading/Loading';
 import { MatchInfo } from '../../components/Matches/MatchInfo';
 
 interface INextMatchProps {
   id: number;
+  activeTeam: string;
 }
 
-export const NextMatch: React.FC<INextMatchProps> = ({ id }) => {
+export const NextMatch: React.FC<INextMatchProps> = ({ id, activeTeam }) => {
   return (
     <Query<INextMatchQuery, INextMatchQueryVariables>
       query={NEXT_MATCH_QUERY}
@@ -21,7 +25,10 @@ export const NextMatch: React.FC<INextMatchProps> = ({ id }) => {
         return (
           <div className='next-match'>
             <span>Next match</span>
-            <MatchInfo match={data.nextMatch.matches[0]} />
+            <MatchInfo
+              match={data.nextMatch.matches[0]}
+              activeTeam={activeTeam}
+            />
           </div>
         );
       }}
