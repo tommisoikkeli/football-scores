@@ -38,13 +38,11 @@ const filterLosses = (matches: IMatch[], activeTeam: string): IMatch[] => {
   });
 };
 
-const filterDraws = (matches: IMatch[]): IMatch[] => {
-  return matches.filter((m: IMatch) => isDraw(m));
-};
+const filterDraws = (matches: IMatch[]): IMatch[] =>
+  matches.filter((m: IMatch) => isDraw(m));
 
-const filterByStatus = (matches: IMatch[], status: MatchStatus): IMatch[] => {
-  return matches.filter((m: IMatch) => m.status === status);
-};
+const filterByStatus = (matches: IMatch[], status: MatchStatus): IMatch[] =>
+  matches.filter((m: IMatch) => m.status === status);
 
 export const filterMatches = (
   matches: IMatch[],
@@ -92,6 +90,5 @@ export const getResultClass = (match: IMatch, activeTeam: string): string => {
   }
 };
 
-export const getMatchStatusClass = (status: string): string => {
-  return status.toLowerCase();
-}
+export const getMatchStatusClass = (status: string): string =>
+  status.toLowerCase();
