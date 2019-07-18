@@ -38,6 +38,10 @@
 
     .group-identifier {
       font-size: 12px;
+
+      @include mobile {
+        width: 10%;
+      }
     }
 
     tbody {

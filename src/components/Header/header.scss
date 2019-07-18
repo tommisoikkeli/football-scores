@@ -1,4 +1,5 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .header {
   display: flex;
@@ -13,6 +14,14 @@
 
     &:hover {
       color: darken($white, 5%);
+    }
+
+    @include mobile {
+      font-size: 34px;
+    }
+
+    @include mobile-small {
+      font-size: 30px;
     }
   }
 }

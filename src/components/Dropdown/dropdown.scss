@@ -55,6 +55,10 @@
         &:hover {
           background: darken($white, 2%);
         }
+
+        @include mobile {
+          padding: 4px;
+        }
       }
 
       @include mobile {

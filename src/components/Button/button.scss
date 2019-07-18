@@ -1,4 +1,5 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .button-container {
   display: flex;
@@ -9,11 +10,11 @@
   outline: none;
   margin: 12px;
   border-radius: 3px;
+  width: 150px;
   
   &.favorite {
     border: 1px solid $favorite-button-color;
     color: $favorite-button-color;
-    width: 150px;
     background: linear-gradient(to right, $white 50%, $favorite-button-color 50%);
     background-size: 200% 100%;
     transition: all ease 0.5s;
@@ -33,5 +34,13 @@
     font-weight: bold;
     flex: 1 1 auto;
     text-transform: uppercase;
+
+    @include mobile {
+      font-size: 10px;
+    }
+  }
+
+  @include mobile {
+    width: 110px;
   }
 }
