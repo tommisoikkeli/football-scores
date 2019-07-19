@@ -8,6 +8,7 @@ import {
 import { LATEST_MATCH_QUERY } from './queries';
 import { Loading } from '../../components/Loading/Loading';
 import { MatchInfo } from '../../components/Matches/MatchInfo';
+import { Error } from '../../components/Error/Error';
 
 interface ILatestMatchProps {
   id: number;
@@ -26,7 +27,7 @@ export const LatestMatch: React.FC<ILatestMatchProps> = ({
       variables={{ id }}>
       {({ loading, error, data }) => {
         if (loading) return <Loading />;
-        if (error) return <div>Error</div>;
+        if (error) return <Error />;
 
         return (
           <div className='latest-match'>

@@ -12,6 +12,7 @@ import { Dropdown } from '../../components/Dropdown/Dropdown';
 import { filterMatches } from '../../components/Matches/matchesHelpers';
 import { Text } from '../../components/Text/Text';
 import './matches-view.scss';
+import { Error } from '../../components/Error/Error';
 
 interface IMatchesProps {
   id: number;
@@ -43,7 +44,7 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
       variables={{ id }}>
       {({ loading, error, data }) => {
         if (loading) return <Loading />;
-        if (error) return <div>Error</div>;
+        if (error) return <Error />;
 
         return (
           <React.Fragment>

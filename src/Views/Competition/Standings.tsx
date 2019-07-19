@@ -10,6 +10,7 @@ import {
   IStandingsQueryVariables
 } from '../../models/standings';
 import { STANDINGS_QUERY } from './queries';
+import { Error } from '../../components/Error/Error';
 
 interface IStandingsProps {
   id: number;
@@ -18,7 +19,8 @@ interface IStandingsProps {
 export const Standings: React.FC<IStandingsProps> = ({ id }) => {
   const hasGroups = (standings: IStandings[]): boolean => standings.length > 1;
 
-  const isTableEmpty = (standings: IStandings[]): boolean => standings.length === 0;
+  const isTableEmpty = (standings: IStandings[]): boolean =>
+    standings.length === 0;
 
   const getSeason = (startDate: Date, endDate: Date): string => {
     const startYear = startDate.getFullYear();
@@ -35,7 +37,7 @@ export const Standings: React.FC<IStandingsProps> = ({ id }) => {
       variables={{ id }}>
       {({ loading, error, data }) => {
         if (loading) return <Loading />;
-        if (error) return <div>Error</div>;
+        if (error) return <Error />;
         return (
           <React.Fragment>
             <Text>{data.standings.competition.name}</Text>

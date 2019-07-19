@@ -14,6 +14,7 @@ import {
   addUnderScores,
   truncate
 } from '../../utils/stringUtils';
+import { Error } from '../../components/Error/Error';
 
 interface IFixturesProps {
   id: number;
@@ -64,7 +65,7 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
       variables={{ id }}>
       {({ loading, error, data }) => {
         if (loading) return <Loading />;
-        if (error) return <div>Error</div>;
+        if (error) return <Error />;
 
         return (
           <div className='fixtures'>

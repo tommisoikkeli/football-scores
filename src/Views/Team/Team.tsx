@@ -8,6 +8,7 @@ import { TeamInfo } from '../../components/Team/TeamInfo';
 import { Tabs } from '../../components/Tabs/Tabs';
 import { Tab } from '../../components/Tabs/Tab';
 import { Matches } from './Matches';
+import { Error } from '../../components/Error/Error';
 
 interface ITeamProps extends RouteComponentProps<{ id: string }> {}
 
@@ -57,7 +58,7 @@ export const Team: React.FC<ITeamProps> = props => {
       variables={{ id: parseInt(props.match.params.id) }}>
       {({ loading, error, data }) => {
         if (loading) return <Loading />;
-        if (error) return <div>Error</div>;
+        if (error) return <Error />;
 
         return (
           <React.Fragment>

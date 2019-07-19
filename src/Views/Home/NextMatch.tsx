@@ -20,7 +20,7 @@ export const NextMatch: React.FC<INextMatchProps> = ({ id, activeTeam }) => {
       variables={{ id }}>
       {({ loading, error, data }) => {
         if (loading) return <Loading />;
-        if (error) return <div>Error</div>;
+        if (error) return null;
 
         return (
           <div className='next-match'>

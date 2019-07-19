@@ -5,6 +5,7 @@ import { Loading } from '../../components/Loading/Loading';
 import '../../components/Competitions/competitions.scss';
 import { ICompetition, ICompetitionsQuery } from '../../models/competitions';
 import { COMPETITIONS_QUERY } from './queries';
+import { Error } from '../../components/Error/Error';
 
 export const Competitions: React.FC = () => {
   const getCompetitionCards = (competitions: ICompetition[]): JSX.Element[] => {
@@ -19,7 +20,7 @@ export const Competitions: React.FC = () => {
     <Query<ICompetitionsQuery> query={COMPETITIONS_QUERY}>
       {({ loading, error, data }) => {
         if (loading) return <Loading />;
-        if (error) return <div>Error</div>;
+        if (error) return <Error />;
         return (
           <div className='competitions'>
             {getCompetitionCards(data.competitions.competitions)}

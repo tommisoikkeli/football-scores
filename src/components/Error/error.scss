@@ -1,0 +1,10 @@
+@import '../../styles/variables.scss';
+
+.error {
+  display: inline-block;
+  border: 1px solid $error-red;
+  color: $error-red;
+  padding: 12px;
+  border-radius: 3px;
+  margin: 15px;
+}
