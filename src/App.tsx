@@ -10,7 +10,7 @@ import { Competition } from './Views/Competition/Competition';
 import { Footer } from './components/Footer/Footer';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:8080/graphql',
+  uri: 'https://fierce-cove-13214.herokuapp.com/graphql',
   cache: new InMemoryCache()
 });
 
