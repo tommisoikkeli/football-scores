@@ -5,6 +5,7 @@ import { FollowedTeam } from '../../components/Team/FollowedTeam';
 import { LatestMatch } from './LatestMatch';
 import { NextMatch } from './NextMatch';
 import { Link } from 'react-router-dom';
+import { Text } from '../../components/Text/Text';
 
 export const Followed: React.FC = () => {
   const followedTeams = getLocalStorageItems('teams');
@@ -18,7 +19,13 @@ export const Followed: React.FC = () => {
     }
   };
 
-  const getFollowedTeams = (): JSX.Element[] => {
+  const getFollowedTeams = (): JSX.Element | JSX.Element[] => {
+    if (!followedTeams.length) {
+      return (
+        <Text>No teams added</Text>
+      );
+    }
+
     return followedTeams.map((t: ITeam) => (
       <div key={t.id} className='followed-teams-container'>
         <FollowedTeam

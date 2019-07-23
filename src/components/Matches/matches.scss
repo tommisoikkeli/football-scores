@@ -130,10 +130,6 @@
     .matchday {
       flex: 1;
     }
-
-    @include mobile {
-      margin-top: 5px;
-    }
   }
 
   .match-result {
@@ -202,7 +198,6 @@
 
   @include mobile-small {
     width: 265px;
-    height: 90px;
   }
 }
 
