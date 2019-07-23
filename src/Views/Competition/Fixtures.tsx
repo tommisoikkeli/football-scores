@@ -15,6 +15,7 @@ import {
   truncate
 } from '../../utils/stringUtils';
 import { Error } from '../../components/Error/Error';
+import { Text } from '../../components/Text/Text';
 
 interface IFixturesProps {
   id: number;
@@ -66,6 +67,10 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
       {({ loading, error, data }) => {
         if (loading) return <Loading />;
         if (error) return <Error />;
+
+        if (!data.fixtures.matches.length) {
+          return <Text>Fixtures not yet available.</Text>;
+        }
 
         return (
           <div className='fixtures'>
