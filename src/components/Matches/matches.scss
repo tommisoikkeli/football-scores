@@ -2,6 +2,9 @@
 @import '../../styles/mixins.scss';
 
 .match-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 15px;
   margin-bottom: 15px;
   border: 1px solid $border-grey;
@@ -41,6 +44,7 @@
   }
 
   .match-status {
+    align-self: center;
     padding: 7px;
     font-size: 14px;
     border-radius: 5px;
@@ -130,6 +134,10 @@
     .matchday {
       flex: 1;
     }
+
+    @include mobile {
+      margin-top: 5px;
+    }
   }
 
   .match-result {
@@ -198,6 +206,7 @@
 
   @include mobile-small {
     width: 265px;
+    padding: 12px;
   }
 }
 
