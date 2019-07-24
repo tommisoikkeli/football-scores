@@ -69,7 +69,7 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
     <Query<IFixturesQuery, IFixturesQueryVariables>
       query={FIXTURES_QUERY}
       variables={{ id }}
-      pollInterval={60000}>
+      pollInterval={30000}>
       {({ loading, error, data, stopPolling }) => {
         if (loading) return <Loading />;
         if (error) return <Error />;

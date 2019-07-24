@@ -49,7 +49,7 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
     <Query<IMatchesQuery, IMatchesQueryVariables>
       query={MATCHES_QUERY}
       variables={{ id }}
-      pollInterval={60000}>
+      pollInterval={30000}>
       {({ loading, error, data, stopPolling }) => {
         if (loading) return <Loading />;
         if (error) return <Error />;
