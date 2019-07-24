@@ -86,7 +86,7 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
         return (
           <div className='fixtures'>
             {setMatches(data.fixtures.matches)}
-            {setFilter(getDropdownOptions(data.fixtures.matches)[0])}
+            {!filter && setFilter(getDropdownOptions(data.fixtures.matches)[0])}
             <div ref={dropdownRef}>
               <Dropdown
                 label='Matchday'
