@@ -11,3 +11,19 @@ export function useWindowWidth(): number {
 
   return width;
 }
+
+export function useOutsideClick(
+  ref: React.RefObject<HTMLDivElement>,
+  handler: () => void
+): void {
+  const handleOutsideClick = (event: React.MouseEvent<HTMLElement>): void => {
+    if (ref.current && !ref.current.contains(event.target as Node)) {
+      handler();
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('click', handleOutsideClick as any);
+    return () => window.removeEventListener('click', handleOutsideClick as any);
+  });
+}

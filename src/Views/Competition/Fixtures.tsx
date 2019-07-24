@@ -17,6 +17,7 @@ import {
 import { Error } from '../../components/Error/Error';
 import { Text } from '../../components/Text/Text';
 import { areMatchesInPlay } from '../../components/Matches/matchesHelpers';
+import { useOutsideClick } from '../../utils/hooks';
 
 interface IFixturesProps {
   id: number;
@@ -26,6 +27,9 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
   const [matches, setMatches] = React.useState<IMatch[]>([]);
   const [filter, setFilter] = React.useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = React.useState<boolean>(false);
+  const dropdownRef = React.useRef(null);
+
+  useOutsideClick(dropdownRef, () => setIsDropdownOpen(false));
 
   const getMatchesToShow = (): IMatch[] => {
     if (filter) {
@@ -83,14 +87,16 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
           <div className='fixtures'>
             {!matches.length && setMatches(data.fixtures.matches)}
             {!filter && setFilter(getDropdownOptions(data.fixtures.matches)[0])}
-            <Dropdown
-              label='Matchday'
-              options={getDropdownOptions(data.fixtures.matches)}
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              onItemSelect={option => setFilter(option)}
-              isOpen={isDropdownOpen}
-              value={truncate(filter, 16)}
-            />
+            <div ref={dropdownRef}>
+              <Dropdown
+                label='Matchday'
+                options={getDropdownOptions(data.fixtures.matches)}
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                onItemSelect={option => setFilter(option)}
+                isOpen={isDropdownOpen}
+                value={truncate(filter, 16)}
+              />
+            </div>
             {getFixtures(getMatchesToShow(), data.fixtures.competition)}
           </div>
         );

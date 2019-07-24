@@ -9,10 +9,14 @@ import { MATCHES_QUERY } from './queries';
 import { Loading } from '../../components/Loading/Loading';
 import { MatchInfo } from '../../components/Matches/MatchInfo';
 import { Dropdown } from '../../components/Dropdown/Dropdown';
-import { filterMatches, areMatchesInPlay } from '../../components/Matches/matchesHelpers';
+import {
+  filterMatches,
+  areMatchesInPlay
+} from '../../components/Matches/matchesHelpers';
 import { Text } from '../../components/Text/Text';
 import './matches-view.scss';
 import { Error } from '../../components/Error/Error';
+import { useOutsideClick } from '../../utils/hooks';
 
 interface IMatchesProps {
   id: number;
@@ -32,8 +36,11 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
   const [matches, setMatches] = React.useState<IMatch[]>([]);
   const [filter, setFilter] = React.useState<string>('All');
   const [isDropdownOpen, setIsDropdownOpen] = React.useState<boolean>(false);
+  const dropdownRef = React.useRef(null);
   const matchesToShow =
     filter !== 'All' ? filterMatches(matches, filter, activeTeam) : matches;
+
+  useOutsideClick(dropdownRef, () => setIsDropdownOpen(false));
 
   const getMatchCount = (): string =>
     matchesToShow.length === 1 ? '1 match' : `${matchesToShow.length} matches`;
@@ -55,14 +62,16 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
         return (
           <React.Fragment>
             <div className='matches-header-section'>
-              <Dropdown
-                label='Filter'
-                options={filterOptions}
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                onItemSelect={option => setFilter(option)}
-                isOpen={isDropdownOpen}
-                value={filter}
-              />
+              <div ref={dropdownRef}>
+                <Dropdown
+                  label='Filter'
+                  options={filterOptions}
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  onItemSelect={option => setFilter(option)}
+                  isOpen={isDropdownOpen}
+                  value={filter}
+                />
+              </div>
               <Text>{getMatchCount()}</Text>
             </div>
             {!matches.length && setMatches(data.matches.matches)}
