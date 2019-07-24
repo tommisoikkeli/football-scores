@@ -9,7 +9,7 @@ import { MATCHES_QUERY } from './queries';
 import { Loading } from '../../components/Loading/Loading';
 import { MatchInfo } from '../../components/Matches/MatchInfo';
 import { Dropdown } from '../../components/Dropdown/Dropdown';
-import { filterMatches } from '../../components/Matches/matchesHelpers';
+import { filterMatches, areMatchesInPlay } from '../../components/Matches/matchesHelpers';
 import { Text } from '../../components/Text/Text';
 import './matches-view.scss';
 import { Error } from '../../components/Error/Error';
@@ -41,10 +41,16 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
   return (
     <Query<IMatchesQuery, IMatchesQueryVariables>
       query={MATCHES_QUERY}
-      variables={{ id }}>
-      {({ loading, error, data }) => {
+      variables={{ id }}
+      pollInterval={60000}>
+      {({ loading, error, data, stopPolling }) => {
         if (loading) return <Loading />;
         if (error) return <Error />;
+
+        // Prevent refetching if no matches are live.
+        if (!areMatchesInPlay(data.matches.matches)) {
+          stopPolling();
+        }
 
         return (
           <React.Fragment>

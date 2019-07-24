@@ -92,3 +92,6 @@ export const getResultClass = (match: IMatch, activeTeam: string): string => {
 
 export const getMatchStatusClass = (status: string): string =>
   status.toLowerCase();
+
+export const areMatchesInPlay = (matches: IMatch[]): boolean =>
+  matches.some((m: IMatch) => m.status === MatchStatus.IN_PLAY);

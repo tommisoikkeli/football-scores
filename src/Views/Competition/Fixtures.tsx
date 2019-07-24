@@ -16,6 +16,7 @@ import {
 } from '../../utils/stringUtils';
 import { Error } from '../../components/Error/Error';
 import { Text } from '../../components/Text/Text';
+import { areMatchesInPlay } from '../../components/Matches/matchesHelpers';
 
 interface IFixturesProps {
   id: number;
@@ -63,10 +64,16 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
   return (
     <Query<IFixturesQuery, IFixturesQueryVariables>
       query={FIXTURES_QUERY}
-      variables={{ id }}>
-      {({ loading, error, data }) => {
+      variables={{ id }}
+      pollInterval={60000}>
+      {({ loading, error, data, stopPolling }) => {
         if (loading) return <Loading />;
         if (error) return <Error />;
+
+        // Prevent refetching if no matches are live.
+        if (!areMatchesInPlay(data.fixtures.matches)) {
+          stopPolling();
+        }
 
         if (!data.fixtures.matches.length) {
           return <Text>Fixtures not yet available.</Text>;
