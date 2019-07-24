@@ -74,7 +74,7 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
               </div>
               <Text>{getMatchCount()}</Text>
             </div>
-            {!matches.length && setMatches(data.matches.matches)}
+            {setMatches(data.matches.matches)}
             {matchesToShow.map((m: IMatch) => (
               <React.Fragment key={m.id}>
                 <MatchInfo match={m} activeTeam={activeTeam} />
