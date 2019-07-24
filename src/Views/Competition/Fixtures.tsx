@@ -97,7 +97,7 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
                 value={truncate(filter, 16)}
               />
             </div>
-            {getFixtures(getMatchesToShow(), data.fixtures.competition)}
+            {matches.length && getFixtures(getMatchesToShow(), data.fixtures.competition)}
           </div>
         );
       }}
