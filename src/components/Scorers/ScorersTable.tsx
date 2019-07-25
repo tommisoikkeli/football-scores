@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { IScorer } from '../../models/scorers';
 import './scorers.scss';
 import { Link } from 'react-router-dom';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { IMatch, MatchStatus } from '../../models/matches';
 import './matches.scss';
 import { capitalize, removeUnderScores } from '../../utils/stringUtils';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { IPlayer } from '../../models/team';
 import { Text } from '../Text/Text';
 import { checkPlayerAndAddGoatIfNeeded } from '../../utils/goatUtils';

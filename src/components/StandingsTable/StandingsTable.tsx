@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import './standings.scss';
 import { TeamCrest } from '../Team/TeamCrest';
 import { ITeamStanding } from '../../models/standings';

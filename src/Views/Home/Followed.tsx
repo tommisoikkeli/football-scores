@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { getLocalStorageItems } from '../../utils/localStorageUtils';
 import { ITeam } from '../../models/team';
 import { FollowedTeam } from '../../components/Team/FollowedTeam';
@@ -9,7 +9,7 @@ import { Text } from '../../components/Text/Text';
 
 export const Followed: React.FC = () => {
   const followedTeams = getLocalStorageItems('teams');
-  const [active, setActive] = React.useState<string>('');
+  const [active, setActive] = useState<string>('');
 
   const onItemClick = (name: string): void => {
     if (active === name) {

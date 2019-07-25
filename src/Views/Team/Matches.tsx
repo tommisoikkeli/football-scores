@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useRef } from 'react';
 import { Query } from 'react-apollo';
 import {
   IMatchesQuery,
@@ -33,10 +33,10 @@ const filterOptions: string[] = [
 ];
 
 export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
-  const [matches, setMatches] = React.useState<IMatch[]>([]);
-  const [filter, setFilter] = React.useState<string>('All');
-  const [isDropdownOpen, setIsDropdownOpen] = React.useState<boolean>(false);
-  const dropdownRef = React.useRef(null);
+  const [matches, setMatches] = useState<IMatch[]>([]);
+  const [filter, setFilter] = useState<string>('All');
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const matchesToShow =
     filter !== 'All' ? filterMatches(matches, filter, activeTeam) : matches;
 

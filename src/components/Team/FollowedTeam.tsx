@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { ITeam } from '../../models/team';
 import { TeamCrest } from './TeamCrest';
 

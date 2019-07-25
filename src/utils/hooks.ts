@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export function useWindowWidth(): number {
-  const [width, setWidth] = React.useState<number>(window.innerWidth);
+  const [width, setWidth] = useState<number>(window.innerWidth);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -22,7 +22,7 @@ export function useOutsideClick(
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('click', handleOutsideClick as any);
     return () => window.removeEventListener('click', handleOutsideClick as any);
   });

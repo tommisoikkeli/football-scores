@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useRef } from 'react';
 import { Query } from 'react-apollo';
 import { IFixturesQuery, IFixturesQueryVariables } from '../../models/fixtures';
 import { FIXTURES_QUERY } from './queries';
@@ -24,10 +24,10 @@ interface IFixturesProps {
 }
 
 export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
-  const [matches, setMatches] = React.useState<IMatch[]>([]);
-  const [filter, setFilter] = React.useState<string>('');
-  const [isDropdownOpen, setIsDropdownOpen] = React.useState<boolean>(false);
-  const dropdownRef = React.useRef(null);
+  const [matches, setMatches] = useState<IMatch[]>([]);
+  const [filter, setFilter] = useState<string>('');
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useOutsideClick(dropdownRef, () => setIsDropdownOpen(false));
 

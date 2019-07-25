@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { StandingsTable } from './StandingsTable';
 import { IStandings } from '../../models/standings';
 import { removeUnderScores } from '../../utils/stringUtils';

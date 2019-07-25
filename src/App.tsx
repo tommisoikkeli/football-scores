@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import './App.scss';
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient, { InMemoryCache } from 'apollo-boost';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Text } from '../../components/Text/Text';
 import { Competitions } from './Competitions';
 import { Tabs } from '../../components/Tabs/Tabs';
@@ -11,7 +11,7 @@ enum HomeTabs {
 }
 
 export const Home: React.FC = () => {
-  const [active, setActive] = React.useState<HomeTabs>(HomeTabs.HOME);
+  const [active, setActive] = useState<HomeTabs>(HomeTabs.HOME);
 
   const renderTabs = (): JSX.Element => (
     <Tabs>

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Query } from 'react-apollo';
 import { SCORERS_QUERY } from './queries';
 import { Loading } from '../../components/Loading/Loading';

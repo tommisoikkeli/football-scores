@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Standings } from './Standings';
 import { Tabs } from '../../components/Tabs/Tabs';
@@ -15,7 +15,7 @@ enum CompetitionTabs {
 }
 
 export const Competition: React.FC<ICompetitionProps> = props => {
-  const [activeTab, setActiveTab] = React.useState<CompetitionTabs>(
+  const [activeTab, setActiveTab] = useState<CompetitionTabs>(
     CompetitionTabs.STANDINGS
   );
 

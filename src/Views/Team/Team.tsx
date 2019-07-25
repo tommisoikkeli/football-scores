@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Query } from 'react-apollo';
 import { ITeamQuery, ITeamQueryVariables, ITeam } from '../../models/team';
 import { TEAM_QUERY } from './queries';
@@ -18,7 +18,7 @@ enum TeamTabs {
 }
 
 export const Team: React.FC<ITeamProps> = props => {
-  const [activeTab, setActiveTab] = React.useState<TeamTabs>(TeamTabs.OVERVIEW);
+  const [activeTab, setActiveTab] = useState<TeamTabs>(TeamTabs.OVERVIEW);
 
   const renderTabs = (): JSX.Element => (
     <Tabs>

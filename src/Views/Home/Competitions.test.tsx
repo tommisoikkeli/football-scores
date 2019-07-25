@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { COMPETITIONS_QUERY } from './queries';
 import { mount } from 'enzyme';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ITeam, IPlayer } from '../../models/team';
 import { TeamCrest } from './TeamCrest';
 import './team.scss';
@@ -21,11 +21,11 @@ const LOCAL_STORAGE_KEY: string = 'teams';
 
 export const TeamInfo: React.FC<ITeamInfoProps> = ({ team }) => {
   const isTeamFollowed: boolean = isTeamSaved(LOCAL_STORAGE_KEY, team.id);
-  const [isFollowed, setIsFollowed] = React.useState<boolean>(isTeamFollowed);
+  const [isFollowed, setIsFollowed] = useState<boolean>(isTeamFollowed);
 
   // Save or remove team on button click.
   // To avoid duplicates, it first checks if team is saved already
-  React.useEffect(() => {
+  useEffect(() => {
     const { id, name, crestUrl } = team;
     if (isFollowed && !isTeamFollowed) {
       setLocalStorageItem(LOCAL_STORAGE_KEY, { id, name, crestUrl });

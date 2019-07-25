@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { BeatLoader } from 'react-spinners';
 
 export const Loading: React.FC = () => (
