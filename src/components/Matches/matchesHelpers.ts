@@ -93,5 +93,9 @@ export const getResultClass = (match: IMatch, activeTeam: string): string => {
 export const getMatchStatusClass = (status: string): string =>
   status.toLowerCase();
 
-export const areMatchesInPlay = (matches: IMatch[]): boolean =>
-  matches.some((m: IMatch) => m.status === MatchStatus.IN_PLAY);
+export const areMatchesInPlay = (matches: IMatch[]): boolean => {
+  // Match is live when status is either in play or paused.
+  const liveStatuses = ['IN_PLAY', 'PAUSED'];
+
+  return matches.some((m: IMatch) => liveStatuses.includes(m.status));
+}
