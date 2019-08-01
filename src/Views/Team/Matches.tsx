@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Query } from 'react-apollo';
 import {
   IMatchesQuery,
@@ -16,7 +16,6 @@ import {
 import { Text } from '../../components/Text/Text';
 import './matches-view.scss';
 import { Error } from '../../components/Error/Error';
-import { useOutsideClick } from '../../utils/hooks';
 
 interface IMatchesProps {
   id: number;
@@ -36,11 +35,8 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
   const [matches, setMatches] = useState<IMatch[]>([]);
   const [filter, setFilter] = useState<string>('All');
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const matchesToShow =
     filter !== 'All' ? filterMatches(matches, filter, activeTeam) : matches;
-
-  useOutsideClick(dropdownRef, () => setIsDropdownOpen(false));
 
   const getMatchCount = (): string =>
     matchesToShow.length === 1 ? '1 match' : `${matchesToShow.length} matches`;
@@ -62,7 +58,7 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
         return (
           <React.Fragment>
             <div className='matches-header-section'>
-              <div ref={dropdownRef}>
+              <div>
                 <Dropdown
                   label='Filter'
                   options={filterOptions}
@@ -70,6 +66,7 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
                   onItemSelect={option => setFilter(option)}
                   isOpen={isDropdownOpen}
                   value={filter}
+                  outsideClickHandler={() => setIsDropdownOpen(false)}
                 />
               </div>
               <Text>{getMatchCount()}</Text>

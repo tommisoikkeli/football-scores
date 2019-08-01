@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './dropdown.scss';
+import { useOutsideClick } from '../../utils/hooks';
 
 interface IDropdownProps {
   label: string;
@@ -8,6 +9,7 @@ interface IDropdownProps {
   onItemSelect: (option: string) => void;
   isOpen: boolean;
   value: string;
+  outsideClickHandler: () => void;
 }
 
 export const Dropdown: React.FC<IDropdownProps> = ({
@@ -16,8 +18,13 @@ export const Dropdown: React.FC<IDropdownProps> = ({
   onClick,
   onItemSelect,
   isOpen,
-  value
+  value,
+  outsideClickHandler
 }) => {
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useOutsideClick(dropdownRef, outsideClickHandler);
+
   const getOptions = (): JSX.Element[] => {
     return options.map((o: string, i: number) => (
       <li
@@ -34,7 +41,10 @@ export const Dropdown: React.FC<IDropdownProps> = ({
       <div className='dropdown-label'>
         <label>{label}</label>
       </div>
-      <div className={`dropdown ${isOpen ? 'open' : ''}`} onClick={onClick}>
+      <div
+        className={`dropdown ${isOpen ? 'open' : ''}`}
+        onClick={onClick}
+        ref={dropdownRef}>
         <div className='selected'>{value}</div>
         <ul className={`dropdown-options ${isOpen ? 'open' : ''}`}>
           {getOptions()}

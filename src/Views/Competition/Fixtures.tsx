@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Query } from 'react-apollo';
 import { IFixturesQuery, IFixturesQueryVariables } from '../../models/fixtures';
 import { FIXTURES_QUERY } from './queries';
@@ -17,7 +17,6 @@ import {
 import { Error } from '../../components/Error/Error';
 import { Text } from '../../components/Text/Text';
 import { areMatchesInPlay } from '../../components/Matches/matchesHelpers';
-import { useOutsideClick } from '../../utils/hooks';
 
 interface IFixturesProps {
   id: number;
@@ -27,10 +26,7 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
   const [matches, setMatches] = useState<IMatch[]>([]);
   const [filter, setFilter] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useOutsideClick(dropdownRef, () => setIsDropdownOpen(false));
-
+  
   const getMatchesToShow = (): IMatch[] => {
     if (filter) {
       return matches.filter((m: IMatch) =>
@@ -87,7 +83,7 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
           <div className='fixtures'>
             {setMatches(data.fixtures.matches)}
             {!filter && setFilter(getDropdownOptions(data.fixtures.matches)[0])}
-            <div ref={dropdownRef}>
+            <div>
               <Dropdown
                 label='Matchday'
                 options={getDropdownOptions(data.fixtures.matches)}
@@ -95,6 +91,7 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
                 onItemSelect={option => setFilter(option)}
                 isOpen={isDropdownOpen}
                 value={truncate(filter, 16)}
+                outsideClickHandler={() => setIsDropdownOpen(false)}
               />
             </div>
             {matches.length && getFixtures(getMatchesToShow(), data.fixtures.competition)}
