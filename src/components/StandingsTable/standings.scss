@@ -59,6 +59,10 @@
         td {
           padding: 7px;
           width: 5%;
+
+          @include mobile-small {
+            padding: 5px;
+          }
           
           &:nth-child(2) {
             width: 25%;
