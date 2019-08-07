@@ -1,13 +1,20 @@
 import React from 'react';
 import './standings.scss';
 import { TeamCrest } from '../Team/TeamCrest';
-import { ITeamStanding } from '../../models/standings';
+import {
+  ITeamStanding,
+  IStandingsIndicators,
+  IIndicators
+} from '../../models/standings';
 import { Link } from 'react-router-dom';
 import { useWindowWidth } from '../../utils/hooks';
+import { getPositionIndicatorClass } from './standingsHelpers';
+import { ColorBall } from '../Team/ColorBall';
 
 interface IStandingsTableProps {
   standings: ITeamStanding[];
   groupIdentifier?: string;
+  standingsIndicators?: IStandingsIndicators;
 }
 
 const MAX_WIDTH: number = 480;
@@ -17,7 +24,8 @@ const isWindowOnMaxWidth = (width: number): boolean => width <= MAX_WIDTH;
 
 export const StandingsTable: React.FC<IStandingsTableProps> = ({
   standings,
-  groupIdentifier
+  groupIdentifier,
+  standingsIndicators
 }) => {
   const width = useWindowWidth();
 
@@ -52,7 +60,13 @@ export const StandingsTable: React.FC<IStandingsTableProps> = ({
   const getTableStandings = (standings: ITeamStanding[]): JSX.Element[] => {
     return standings.map((s: ITeamStanding) => (
       <tr key={s.team.id}>
-        <td>{s.position}</td>
+        <td
+          className={
+            standingsIndicators &&
+            getPositionIndicatorClass(standingsIndicators, s.position)
+          }>
+          {s.position}
+        </td>
         <td>
           <div className='team-name-block'>
             <TeamCrest crestUrl={s.team.crestUrl} />{' '}
@@ -75,12 +89,24 @@ export const StandingsTable: React.FC<IStandingsTableProps> = ({
     ));
   };
 
+  const renderPositionIndicators = (): JSX.Element => (
+    <div className='position-indicators-wrapper'>
+      {standingsIndicators.indicators.map((i: IIndicators, index: number) => (
+        <div key={`indicator-${index}`} className='indicator'>
+          <ColorBall color={i.color} />
+          <span>{i.qualification}</span>
+        </div>
+      ))}
+    </div>
+  );
+
   return (
     <div className='standings-table-wrapper'>
       <table className='standings-table'>
         {getTableHeaders()}
         <tbody>{getTableStandings(standings)}</tbody>
       </table>
+      {standingsIndicators && renderPositionIndicators()}
     </div>
   );
 };

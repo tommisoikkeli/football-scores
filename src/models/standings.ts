@@ -40,3 +40,22 @@ export interface IStandingsQuery {
 export interface IStandingsQueryVariables {
   id: number;
 }
+
+export interface IStandingsIndicators {
+  competition: string;
+  indicators: IIndicators[];
+  topPositions: IPosition;
+  lowerTopPositions: IPosition;
+  bottomPositions: IPosition;
+  midPositions?: IPosition;
+  upperBottomPositions?: IPosition;
+}
+
+interface IPosition {
+  positions: number[];
+}
+
+export interface IIndicators {
+  qualification: string;
+  color: string;
+}

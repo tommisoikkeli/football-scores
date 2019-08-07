@@ -11,6 +11,7 @@ import {
 } from '../../models/standings';
 import { STANDINGS_QUERY } from './queries';
 import { Error } from '../../components/Error/Error';
+import { getStandingIndicatorsForCompetition } from '../../components/StandingsTable/standingsHelpers';
 
 interface IStandingsProps {
   id: number;
@@ -49,7 +50,10 @@ export const Standings: React.FC<IStandingsProps> = ({ id }) => {
             </Text>
             {!isTableEmpty(data.standings.standings) &&
             !hasGroups(data.standings.standings) ? (
-              <StandingsTable standings={data.standings.standings[0].table} />
+              <StandingsTable
+                standings={data.standings.standings[0].table}
+                standingsIndicators={getStandingIndicatorsForCompetition(data.standings.competition.name)}
+              />
             ) : (
               !isTableEmpty(data.standings.standings) && (
                 <GroupsTable groups={data.standings.standings} />

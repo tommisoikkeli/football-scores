@@ -3,6 +3,8 @@
 
 .standings-table-wrapper {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   margin-bottom: 15px;
 
@@ -57,9 +59,33 @@
         td {
           padding: 7px;
           width: 5%;
-
+          
           &:nth-child(2) {
             width: 25%;
+          }
+
+          &.no-position {
+            border-left: 3px solid $white;
+          }
+
+          &.top-position {
+            border-left: 3px solid $top-position-blue;
+          }
+
+          &.lower-top-position {
+            border-left: 3px solid $lower-top-position-orange;
+          }
+
+          &.mid-position {
+            border-left: 3px solid $mid-position-green;
+          }
+
+          &.upper-bottom-position {
+            border-left: 3px solid $upper-bottom-position-yellow;
+          }
+
+          &.bottom-position {
+            border-left: 3px solid $bottom-position-red;
           }
         }
 
@@ -103,6 +129,32 @@
         &:hover {
           background: darken(#fff, 2%);
         }
+      }
+    }
+  }
+
+  .position-indicators-wrapper {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid $border-grey;
+    font-size: 14px;
+    width: 280px;
+
+    @include mobile {
+      font-size: 12px;
+    }
+
+    .indicator {
+      display: flex;
+      align-items: center;
+      padding: 2px;
+
+      .color-ball {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 5px;
       }
     }
   }
