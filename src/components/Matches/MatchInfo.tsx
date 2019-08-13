@@ -36,7 +36,7 @@ export const MatchInfo: React.FC<IMatchInfoProps> = ({
         <span>{competitionToShow.name}</span>
       </Link>
       <Text>
-        {parseDate(new Date(utcDate))} {parseTime(new Date(utcDate))}
+        {parseDate(utcDate)} {parseTime(utcDate)}
       </Text>
       <div className='matchday'>
         {matchday ? (
