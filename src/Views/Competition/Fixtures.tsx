@@ -31,7 +31,7 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
     if (filter) {
       return matches.filter((m: IMatch) =>
         m.matchday !== null
-          ? m.matchday === +filter
+          ? m.matchday === +filter.replace('Matchday', '')
           : m.stage === addUnderScores(filter.toUpperCase())
       );
     }
@@ -55,7 +55,7 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
       new Set(
         matches.map(m =>
           m.matchday !== null
-            ? `${m.matchday}`
+            ? `Matchday ${m.matchday}`
             : `${capitalize(removeUnderScores(m.stage))}`
         )
       )
