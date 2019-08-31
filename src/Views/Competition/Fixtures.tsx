@@ -61,6 +61,14 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
       )
     );
 
+  const setDefaultDropdownOption = (matches: IMatch[]): void => {
+    const {currentMatchday} = matches[0].season;
+    if (!currentMatchday) {
+      setFilter(getDropdownOptions(matches)[0])
+    }
+    setFilter(`Matchday ${currentMatchday}`);
+  }
+
   return (
     <Query<IFixturesQuery, IFixturesQueryVariables>
       query={FIXTURES_QUERY}
@@ -82,7 +90,7 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
         return (
           <div className='fixtures'>
             {setMatches(data.fixtures.matches)}
-            {!filter && setFilter(getDropdownOptions(data.fixtures.matches)[0])}
+            {!filter && setDefaultDropdownOption(data.fixtures.matches)}
             <div>
               <Dropdown
                 label='Matchday'

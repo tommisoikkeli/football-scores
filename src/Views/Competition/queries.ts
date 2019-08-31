@@ -53,6 +53,10 @@ export const FIXTURES_QUERY = gql`
       }
       matches {
         id
+        season {
+          id
+          currentMatchday
+        }
         utcDate
         status
         matchday
