@@ -28,7 +28,7 @@ export const Dropdown: React.FC<IDropdownProps> = ({
   const getOptions = (): JSX.Element[] => {
     return options.map((o: string, i: number) => (
       <li
-        className='dropdown-option'
+        className={`dropdown-option ${value === o ? 'active' : ''}`}
         key={`options-${i}`}
         onClick={() => onItemSelect(o)}>
         {o}

@@ -52,8 +52,12 @@
         list-style-type: none;
         padding: 2px;
 
+        &.active {
+          background: darken($white, 3%);
+        }
+
         &:hover {
-          background: darken($white, 2%);
+          background: darken($white, 3%);
         }
 
         @include mobile {
