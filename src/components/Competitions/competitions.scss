@@ -18,7 +18,7 @@
   }
 
   .competition-card {
-    padding: 15px;
+    padding: 18px;
     border: 1px solid $border-grey;
     flex-basis: 12%;
     margin-bottom: 20px;
@@ -64,6 +64,7 @@
     }
 
     @include mobile {
+      padding: 15px;
       flex-basis: 40%;
     }
 
