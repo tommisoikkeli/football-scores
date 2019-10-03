@@ -1,5 +1,5 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/react-hooks';
 import {
   INextMatchQuery,
   INextMatchQueryVariables
@@ -14,24 +14,18 @@ interface INextMatchProps {
 }
 
 export const NextMatch: React.FC<INextMatchProps> = ({ id, activeTeam }) => {
-  return (
-    <Query<INextMatchQuery, INextMatchQueryVariables>
-      query={NEXT_MATCH_QUERY}
-      variables={{ id }}>
-      {({ loading, error, data }) => {
-        if (loading) return <Loading />;
-        if (error) return null;
+  const { loading, error, data } = useQuery<
+    INextMatchQuery,
+    INextMatchQueryVariables
+  >(NEXT_MATCH_QUERY, { variables: { id } });
 
-        return (
-          <div className='next-match'>
-            <span>Next match</span>
-            <MatchInfo
-              match={data.nextMatch.matches[0]}
-              activeTeam={activeTeam}
-            />
-          </div>
-        );
-      }}
-    </Query>
+  if (loading) return <Loading />;
+  if (error) return null;
+
+  return (
+    <div className='next-match'>
+      <span>Next match</span>
+      <MatchInfo match={data.nextMatch.matches[0]} activeTeam={activeTeam} />
+    </div>
   );
 };

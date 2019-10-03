@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/react-hooks';
 import { ITeamQuery, ITeamQueryVariables, ITeam } from '../../models/team';
 import { TEAM_QUERY } from './queries';
 import { RouteComponentProps } from 'react-router';
@@ -52,21 +52,18 @@ export const Team: React.FC<ITeamProps> = props => {
     );
   };
 
-  return (
-    <Query<ITeamQuery, ITeamQueryVariables>
-      query={TEAM_QUERY}
-      variables={{ id: parseInt(props.match.params.id) }}>
-      {({ loading, error, data }) => {
-        if (loading) return <Loading />;
-        if (error) return <Error />;
+  const { loading, error, data } = useQuery<ITeamQuery, ITeamQueryVariables>(
+    TEAM_QUERY,
+    { variables: { id: parseInt(props.match.params.id) } }
+  );
 
-        return (
-          <React.Fragment>
-            {renderTabs()}
-            {renderContent(data.team)}
-          </React.Fragment>
-        );
-      }}
-    </Query>
+  if (loading) return <Loading />;
+  if (error) return <Error />;
+
+  return (
+    <React.Fragment>
+      {renderTabs()}
+      {renderContent(data.team)}
+    </React.Fragment>
   );
 };

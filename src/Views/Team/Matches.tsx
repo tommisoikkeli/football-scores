@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/react-hooks';
 import {
   IMatchesQuery,
   IMatchesQueryVariables,
@@ -41,45 +41,42 @@ export const Matches: React.FC<IMatchesProps> = ({ id, activeTeam }) => {
   const getMatchCount = (): string =>
     matchesToShow.length === 1 ? '1 match' : `${matchesToShow.length} matches`;
 
+  const { loading, error, data, stopPolling } = useQuery<
+    IMatchesQuery,
+    IMatchesQueryVariables
+  >(MATCHES_QUERY, { variables: { id }, pollInterval: 30000 });
+
+  if (loading) return <Loading />;
+  if (error) return <Error />;
+
+  !matches.length && setMatches(data.matches.matches);
+
+  // Prevent refetching if no matches are live.
+  if (!areMatchesInPlay(data.matches.matches)) {
+    stopPolling();
+  }
+
   return (
-    <Query<IMatchesQuery, IMatchesQueryVariables>
-      query={MATCHES_QUERY}
-      variables={{ id }}
-      pollInterval={30000}>
-      {({ loading, error, data, stopPolling }) => {
-        if (loading) return <Loading />;
-        if (error) return <Error />;
-
-        // Prevent refetching if no matches are live.
-        if (!areMatchesInPlay(data.matches.matches)) {
-          stopPolling();
-        }
-
-        return (
-          <React.Fragment>
-            <div className='matches-header-section'>
-              <div>
-                <Dropdown
-                  label='Filter'
-                  options={filterOptions}
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  onItemSelect={option => setFilter(option)}
-                  isOpen={isDropdownOpen}
-                  value={filter}
-                  outsideClickHandler={() => setIsDropdownOpen(false)}
-                />
-              </div>
-              <Text>{getMatchCount()}</Text>
-            </div>
-            {setMatches(data.matches.matches)}
-            {matchesToShow.map((m: IMatch) => (
-              <React.Fragment key={m.id}>
-                <MatchInfo match={m} activeTeam={activeTeam} />
-              </React.Fragment>
-            ))}
-          </React.Fragment>
-        );
-      }}
-    </Query>
+    <React.Fragment>
+      <div className='matches-header-section'>
+        <div>
+          <Dropdown
+            label='Filter'
+            options={filterOptions}
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            onItemSelect={option => setFilter(option)}
+            isOpen={isDropdownOpen}
+            value={filter}
+            outsideClickHandler={() => setIsDropdownOpen(false)}
+          />
+        </div>
+        <Text>{getMatchCount()}</Text>
+      </div>
+      {matchesToShow.map((m: IMatch) => (
+        <React.Fragment key={m.id}>
+          <MatchInfo match={m} activeTeam={activeTeam} />
+        </React.Fragment>
+      ))}
+    </React.Fragment>
   );
 };

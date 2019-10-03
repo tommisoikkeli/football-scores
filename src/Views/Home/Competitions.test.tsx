@@ -1,10 +1,11 @@
 import React from 'react';
-import { MockedProvider } from 'react-apollo/test-utils';
+import { MockedProvider } from '@apollo/react-testing';
 import { COMPETITIONS_QUERY } from './queries';
 import { mount } from 'enzyme';
 import { Competitions } from './Competitions';
 import wait from 'waait';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { act } from 'react-dom/test-utils';
 
 const mocks = [
   {
@@ -59,7 +60,9 @@ describe('Competitions', () => {
   });
 
   it('renders data correctly', async () => {
-    await wait(0);
+    await act(async () => {
+      await wait(0);
+    });
     wrapper.update();
     expect(wrapper.find('.competition-card').length).toBe(2);
   });

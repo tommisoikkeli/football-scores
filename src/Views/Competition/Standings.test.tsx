@@ -1,10 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { MockedProvider } from 'react-apollo/test-utils';
+import { MockedProvider } from '@apollo/react-testing';
 import { Standings } from './Standings';
 import { BrowserRouter as Router } from 'react-router-dom';
 import wait from 'waait';
 import { STANDINGS_QUERY } from './queries';
+import { act } from 'react-dom/test-utils';
 
 const mocks = [
   {
@@ -99,9 +100,16 @@ describe('Standings', () => {
   });
 
   it('renders data', async () => {
-    await wait(0);
+    await act(async () => {
+      await wait(0);
+    });
     wrapper.update();
     expect(wrapper.find('StandingsTable').length).toBe(1);
-    expect(wrapper.find('Text').at(1).text()).toBe('Season 2019 - 2020');
+    expect(
+      wrapper
+        .find('Text')
+        .at(1)
+        .text()
+    ).toBe('Season 2019 - 2020');
   });
 });

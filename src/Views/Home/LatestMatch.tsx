@@ -1,5 +1,5 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/react-hooks';
 import {
   ILatestMatchQuery,
   ILatestMatchQueryVariables,
@@ -21,24 +21,21 @@ export const LatestMatch: React.FC<ILatestMatchProps> = ({
 }) => {
   const getLatestMatch = (matches: IMatch[]) => matches[matches.length - 1];
 
-  return (
-    <Query<ILatestMatchQuery, ILatestMatchQueryVariables>
-      query={LATEST_MATCH_QUERY}
-      variables={{ id }}>
-      {({ loading, error, data }) => {
-        if (loading) return <Loading />;
-        if (error) return <Error />;
+  const { loading, error, data } = useQuery<
+    ILatestMatchQuery,
+    ILatestMatchQueryVariables
+  >(LATEST_MATCH_QUERY, { variables: { id } });
 
-        return (
-          <div className='latest-match'>
-            <span>Latest match</span>
-            <MatchInfo
-              match={getLatestMatch(data.latestMatch.matches)}
-              activeTeam={activeTeam}
-            />
-          </div>
-        );
-      }}
-    </Query>
+  if (loading) return <Loading />;
+  if (error) return <Error />;
+
+  return (
+    <div className='latest-match'>
+      <span>Latest match</span>
+      <MatchInfo
+        match={getLatestMatch(data.latestMatch.matches)}
+        activeTeam={activeTeam}
+      />
+    </div>
   );
 };

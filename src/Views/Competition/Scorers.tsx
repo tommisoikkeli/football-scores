@@ -1,5 +1,5 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/react-hooks';
 import { SCORERS_QUERY } from './queries';
 import { Loading } from '../../components/Loading/Loading';
 import { IScorersQuery, IScorersQueryVariables } from '../../models/scorers';
@@ -11,20 +11,17 @@ interface IScorersProps {
 }
 
 export const Scorers: React.FC<IScorersProps> = ({ id }) => {
-  return (
-    <Query<IScorersQuery, IScorersQueryVariables>
-      query={SCORERS_QUERY}
-      variables={{ id }}>
-      {({ loading, error, data }) => {
-        if (loading) return <Loading />;
-        if (error) return <Error />;
+  const { loading, error, data } = useQuery<
+    IScorersQuery,
+    IScorersQueryVariables
+  >(SCORERS_QUERY, { variables: { id } });
 
-        return (
-          <div className='scorers'>
-            <ScorersTable scorers={data.scorers.scorers} />
-          </div>
-        );
-      }}
-    </Query>
+  if (loading) return <Loading />;
+  if (error) return <Error />;
+
+  return (
+    <div className='scorers'>
+      <ScorersTable scorers={data.scorers.scorers} />
+    </div>
   );
 };

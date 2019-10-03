@@ -1,5 +1,5 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/react-hooks';
 import { Loading } from '../../components/Loading/Loading';
 import { StandingsTable } from '../../components/StandingsTable/StandingsTable';
 import { Text } from '../../components/Text/Text';
@@ -32,36 +32,36 @@ export const Standings: React.FC<IStandingsProps> = ({ id }) => {
     return `Season ${startYear} - ${endYear}`;
   };
 
+  const { loading, error, data } = useQuery<
+    IStandingsQuery,
+    IStandingsQueryVariables
+  >(STANDINGS_QUERY, { variables: { id } });
+
+  if (loading) return <Loading />;
+  if (error) return <Error />;
+
   return (
-    <Query<IStandingsQuery, IStandingsQueryVariables>
-      query={STANDINGS_QUERY}
-      variables={{ id }}>
-      {({ loading, error, data }) => {
-        if (loading) return <Loading />;
-        if (error) return <Error />;
-        return (
-          <React.Fragment>
-            <Text>{data.standings.competition.name}</Text>
-            <Text>
-              {getSeason(
-                new Date(data.standings.season.startDate),
-                new Date(data.standings.season.endDate)
-              )}
-            </Text>
-            {!isTableEmpty(data.standings.standings) &&
-            !hasGroups(data.standings.standings) ? (
-              <StandingsTable
-                standings={data.standings.standings[0].table}
-                standingsIndicators={getStandingIndicatorsForCompetition(data.standings.competition.name)}
-              />
-            ) : (
-              !isTableEmpty(data.standings.standings) && (
-                <GroupsTable groups={data.standings.standings} />
-              )
-            )}
-          </React.Fragment>
-        );
-      }}
-    </Query>
+    <React.Fragment>
+      <Text>{data.standings.competition.name}</Text>
+      <Text>
+        {getSeason(
+          new Date(data.standings.season.startDate),
+          new Date(data.standings.season.endDate)
+        )}
+      </Text>
+      {!isTableEmpty(data.standings.standings) &&
+      !hasGroups(data.standings.standings) ? (
+        <StandingsTable
+          standings={data.standings.standings[0].table}
+          standingsIndicators={getStandingIndicatorsForCompetition(
+            data.standings.competition.name
+          )}
+        />
+      ) : (
+        !isTableEmpty(data.standings.standings) && (
+          <GroupsTable groups={data.standings.standings} />
+        )
+      )}
+    </React.Fragment>
   );
 };

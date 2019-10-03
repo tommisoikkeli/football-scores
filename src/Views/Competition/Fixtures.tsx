@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/react-hooks';
 import { IFixturesQuery, IFixturesQueryVariables } from '../../models/fixtures';
 import { FIXTURES_QUERY } from './queries';
 import { Loading } from '../../components/Loading/Loading';
@@ -26,7 +26,7 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
   const [matches, setMatches] = useState<IMatch[]>([]);
   const [filter, setFilter] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  
+
   const getMatchesToShow = (): IMatch[] => {
     if (filter) {
       return matches.filter((m: IMatch) =>
@@ -62,50 +62,48 @@ export const Fixtures: React.FC<IFixturesProps> = ({ id }) => {
     );
 
   const setDefaultDropdownOption = (matches: IMatch[]): void => {
-    const {currentMatchday} = matches[0].season;
+    const { currentMatchday } = matches[0].season;
     if (!currentMatchday) {
-      setFilter(getDropdownOptions(matches)[0])
+      setFilter(getDropdownOptions(matches)[0]);
     }
     setFilter(`Matchday ${currentMatchday}`);
+  };
+
+  const { loading, error, data, stopPolling } = useQuery<
+    IFixturesQuery,
+    IFixturesQueryVariables
+  >(FIXTURES_QUERY, { variables: { id }, pollInterval: 30000 });
+
+  if (loading) return <Loading />;
+  if (error) return <Error />;
+
+  if (!data.fixtures.matches.length) {
+    return <Text>Fixtures not yet available.</Text>;
+  }
+
+  !matches.length && setMatches(data.fixtures.matches);
+  !filter && setDefaultDropdownOption(data.fixtures.matches);
+
+  // Prevent refetching if no matches are live.
+  if (!areMatchesInPlay(data.fixtures.matches)) {
+    stopPolling();
   }
 
   return (
-    <Query<IFixturesQuery, IFixturesQueryVariables>
-      query={FIXTURES_QUERY}
-      variables={{ id }}
-      pollInterval={30000}>
-      {({ loading, error, data, stopPolling }) => {
-        if (loading) return <Loading />;
-        if (error) return <Error />;
-
-        // Prevent refetching if no matches are live.
-        if (!areMatchesInPlay(data.fixtures.matches)) {
-          stopPolling();
-        }
-
-        if (!data.fixtures.matches.length) {
-          return <Text>Fixtures not yet available.</Text>;
-        }
-
-        return (
-          <div className='fixtures'>
-            {setMatches(data.fixtures.matches)}
-            {!filter && setDefaultDropdownOption(data.fixtures.matches)}
-            <div>
-              <Dropdown
-                label='Matchday'
-                options={getDropdownOptions(data.fixtures.matches)}
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                onItemSelect={option => setFilter(option)}
-                isOpen={isDropdownOpen}
-                value={truncate(filter, 16)}
-                outsideClickHandler={() => setIsDropdownOpen(false)}
-              />
-            </div>
-            {matches.length && getFixtures(getMatchesToShow(), data.fixtures.competition)}
-          </div>
-        );
-      }}
-    </Query>
+    <div className='fixtures'>
+      <div>
+        <Dropdown
+          label='Matchday'
+          options={getDropdownOptions(data.fixtures.matches)}
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          onItemSelect={option => setFilter(option)}
+          isOpen={isDropdownOpen}
+          value={truncate(filter, 16)}
+          outsideClickHandler={() => setIsDropdownOpen(false)}
+        />
+      </div>
+      {matches.length &&
+        getFixtures(getMatchesToShow(), data.fixtures.competition)}
+    </div>
   );
 };

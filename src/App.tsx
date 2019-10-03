@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient, { InMemoryCache } from 'apollo-boost';
 import { Home } from './Views/Home/Home';
 import { BrowserRouter as Router, Route } from 'react-router-dom';

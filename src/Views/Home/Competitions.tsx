@@ -1,5 +1,5 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/react-hooks';
 import { CompetitionCard } from '../../components/Competitions/CompetitionCard';
 import { Loading } from '../../components/Loading/Loading';
 import '../../components/Competitions/competitions.scss';
@@ -16,17 +16,16 @@ export const Competitions: React.FC = () => {
     ));
   };
 
+  const { loading, error, data } = useQuery<ICompetitionsQuery>(
+    COMPETITIONS_QUERY
+  );
+
+  if (loading) return <Loading />;
+  if (error) return <Error />;
+
   return (
-    <Query<ICompetitionsQuery> query={COMPETITIONS_QUERY}>
-      {({ loading, error, data }) => {
-        if (loading) return <Loading />;
-        if (error) return <Error />;
-        return (
-          <div className='competitions'>
-            {getCompetitionCards(data.competitions.competitions)}
-          </div>
-        );
-      }}
-    </Query>
+    <div className='competitions'>
+      {getCompetitionCards(data.competitions.competitions)}
+    </div>
   );
 };
